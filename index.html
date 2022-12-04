@@ -177,6 +177,29 @@
             <h1 id="Welcome-To-My-Blog"><a href="#Welcome-To-My-Blog" class="headerlink" title=" Welcome To My Blog! "></a><div align="center"><a title="Welcome" ></a> Welcome To My Blog! </div></h1><p align="center">
 没事儿写点东西，记录学习。
 <br>
+
+<!-- <p align="center">
+  <img src="/images/photos/mobile/1.jpg">
+  <img src="/images/photos/mobile/2.jpg">
+  <img src="/images/photos/mobile/3.jpg">
+  <img src="/images/photos/mobile/4.jpg">
+<br> -->
+
+<p align="center">
+    <img src="/images/photos/mobile/1.jpg" id="image">
+<br>
+
+<script>
+    var i = 1;
+
+    function image () {
+        var image = document.getElementById ("image");
+        image.src = "/images/photos/mobile/" + i + ".jpg";
+        if (++i > 4) i = 1;
+    };
+
+    setInterval (image, 5000);
+</script>
         
       </div>
 
