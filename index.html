@@ -190,12 +190,12 @@
 <br>
 
 <script>
-    var i = 1;
+    var i = 2;
 
     function image () {
         var image = document.getElementById ("image");
         image.src = "/images/photos/mobile/" + i + ".jpg";
-        if (++i > 4) i = 1;
+        if (++i > 6) i = 0;
     };
 
     setInterval (image, 5000);
