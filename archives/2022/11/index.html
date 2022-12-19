@@ -164,7 +164,7 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 6 篇文章。 继续努力。</span>
+        <span class="collection-header">嗯..! 目前共计 7 篇文章。 继续努力。</span>
       </div>
 
       
@@ -184,8 +184,28 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/%E6%9D%82%E6%96%87/C202%E5%8F%B2/Dorm-War-I/" itemprop="url">
+          <a class="post-title-link" href="/%E6%9D%82%E6%96%87/C202/Dorm-War-I/" itemprop="url">
             <span itemprop="name">大事记-第一次宿舍大战</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2022-11-11T00:00:00+08:00"
+              content="2022-11-11">
+          11-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/%E6%9D%82%E6%96%87/C202/Tang's-insaneness/" itemprop="url">
+            <span itemprop="name">唐の癲</span>
           </a>
       </div>
 
@@ -250,6 +270,20 @@
         </li>
         <li class="sidebar-nav-overview">
           站点概览
+
+          <p id="hitokoto">
+            <a id="hitokoto_text">:D 获取中...</a>
+          </p>
+          <script>
+            fetch('https://v1.hitokoto.cn')
+              .then(response => response.json())
+              .then(data => {
+                const hitokoto = document.querySelector('#hitokoto_text')
+                hitokoto.innerText = data.hitokoto
+              })
+              .catch(console.error)
+          </script>
+
         </li>
       </ul>
 
@@ -270,7 +304,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -283,7 +317,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -23,7 +23,7 @@
   <meta name="description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大事记-第一次宿舍大战">
-<meta property="og:url" content="http://example.com/%E6%9D%82%E6%96%87/C202%E5%8F%B2/Dorm-War-I/index.html">
+<meta property="og:url" content="http://example.com/%E6%9D%82%E6%96%87/C202/Dorm-War-I/index.html">
 <meta property="og:site_name" content="Hello World!">
 <meta property="og:description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:locale" content="zh_CN">
@@ -35,7 +35,7 @@
 <meta property="article:tag" content="宿舍">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/%E6%9D%82%E6%96%87/C202%E5%8F%B2/Dorm-War-I/">
+<link rel="canonical" href="http://example.com/%E6%9D%82%E6%96%87/C202/Dorm-War-I/">
 
 
 <script id="page-configurations">
@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/%E6%9D%82%E6%96%87/C202%E5%8F%B2/Dorm-War-I/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E6%9D%82%E6%96%87/C202/Dorm-War-I/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar/boy.png">
@@ -221,8 +221,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8A%80%E5%B7%A7/OI-competitions-skills/" rel="prev" title="OI比赛中的一些技巧">
-      <i class="fa fa-chevron-left"></i> OI比赛中的一些技巧
+    <a href="/%E6%9D%82%E6%96%87/C202/Tang's-insaneness/" rel="prev" title="唐の癲">
+      <i class="fa fa-chevron-left"></i> 唐の癲
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -286,6 +286,20 @@
         </li>
         <li class="sidebar-nav-overview">
           站点概览
+
+          <p id="hitokoto">
+            <a id="hitokoto_text">:D 获取中...</a>
+          </p>
+          <script>
+            fetch('https://v1.hitokoto.cn')
+              .then(response => response.json())
+              .then(data => {
+                const hitokoto = document.querySelector('#hitokoto_text')
+                hitokoto.innerText = data.hitokoto
+              })
+              .catch(console.error)
+          </script>
+
         </li>
       </ul>
 
@@ -307,7 +321,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -320,7 +334,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

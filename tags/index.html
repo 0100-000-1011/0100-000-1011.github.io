@@ -185,10 +185,10 @@
       <div id="body" class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              目前共计 10 个标签
+              目前共计 11 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/C/" style="font-size: 21px; color: #6f6f6f">C++</a> <a href="/tags/C202/" style="font-size: 12px; color: #ccc">C202</a> <a href="/tags/OI/" style="font-size: 30px; color: #111">OI</a> <a href="/tags/%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" style="font-size: 12px; color: #ccc">一些感想</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 21px; color: #6f6f6f">学习</a> <a href="/tags/%E5%AE%BF%E8%88%8D/" style="font-size: 12px; color: #ccc">宿舍</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 12px; color: #ccc">数论</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 12px; color: #ccc">比赛</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 12px; color: #ccc">生活</a> <a href="/tags/%F0%9F%99%88%F0%9F%99%88%F0%9F%99%88/" style="font-size: 12px; color: #ccc">🙈🙈🙈</a>
+              <a href="/tags/C/" style="font-size: 21px; color: #6f6f6f">C++</a> <a href="/tags/C202/" style="font-size: 21px; color: #6f6f6f">C202</a> <a href="/tags/OI/" style="font-size: 30px; color: #111">OI</a> <a href="/tags/%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/" style="font-size: 12px; color: #ccc">一些感想</a> <a href="/tags/%E5%A5%87%E9%97%BB%E8%BD%B6%E4%BA%8B/" style="font-size: 12px; color: #ccc">奇闻轶事</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 21px; color: #6f6f6f">学习</a> <a href="/tags/%E5%AE%BF%E8%88%8D/" style="font-size: 21px; color: #6f6f6f">宿舍</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 12px; color: #ccc">数论</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 12px; color: #ccc">比赛</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 21px; color: #6f6f6f">生活</a> <a href="/tags/%F0%9F%99%88%F0%9F%99%88%F0%9F%99%88/" style="font-size: 12px; color: #ccc">🙈🙈🙈</a>
             </div>
           </div>
         
@@ -251,6 +251,20 @@
         </li>
         <li class="sidebar-nav-overview">
           站点概览
+
+          <p id="hitokoto">
+            <a id="hitokoto_text">:D 获取中...</a>
+          </p>
+          <script>
+            fetch('https://v1.hitokoto.cn')
+              .then(response => response.json())
+              .then(data => {
+                const hitokoto = document.querySelector('#hitokoto_text')
+                hitokoto.innerText = data.hitokoto
+              })
+              .catch(console.error)
+          </script>
+
         </li>
       </ul>
 
@@ -271,7 +285,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -284,7 +298,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
