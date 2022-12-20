@@ -471,18 +471,61 @@
 
 
 
-<p id="hitokoto" align="center">
+
+<p id="hitokoto" align="center" onclick="find()" ondblclick="count()">
   <font id="hitokoto_text" size=2>:D 获取中...</font>
 </p>
+
 <script>
-  fetch('https://v1.hitokoto.cn')
-    .then(response => response.json())
-    .then(data => {
-      const hitokoto = document.querySelector('#hitokoto_text')
-      hitokoto.innerText = data.hitokoto
-    })
-    .catch(console.error)
+  const hitokoto = document.querySelector('#hitokoto_text')
+  
+  function init () {
+    ++localStorage.clickcount;
+
+    while (--localStorage.clickcount) {
+      localStorage.removeItem (
+        localStorage.clickcount
+      );
+    }
+
+    console.log (localStorage.clickcount);
+    console.log ("clear");
+  }
+
+  function change () {
+    fetch('https://v1.hitokoto.cn')
+      .then(response => response.json())
+      .then(data => {
+        hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)
+  }
+
+  function find () {
+    for (let i = 1; i <= localStorage.clickcount; ++i)
+      console.log (localStorage.getItem (i));    
+  }
+
+  function count () {
+    if (localStorage.clickcount)
+      localStorage.clickcount = 1 +
+      Number(localStorage.clickcount);
+    else localStorage.clickcount = 1;
+
+    localStorage.setItem (
+      localStorage.clickcount,
+      hitokoto.innerText
+    );
+
+    console.log (localStorage.clickcount);
+    console.log (hitokoto.innerText);
+
+    change ();
+  }
+
+  change ();
 </script>
+
 
 <div class="copyright">
   <p align="center">
