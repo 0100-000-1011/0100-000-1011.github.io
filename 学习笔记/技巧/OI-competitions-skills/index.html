@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
+<script type="text/javascript" src="\js\jquery.js"></script>
+
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -147,6 +150,11 @@
 
 
 
+
+<link rel="stylesheet" href="/js/aplayer/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script src="/js/aplayer/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/js/aplayer/dist/music.js"></script>
 </div>
     </header>
 
@@ -564,7 +572,7 @@ $(document).ready(function() {
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </div>
 
 
@@ -580,6 +588,7 @@ $(document).ready(function() {
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -592,6 +601,65 @@ $(document).ready(function() {
 
 
 <script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
 
 
 
@@ -612,6 +680,7 @@ $(document).ready(function() {
 
 
 
+    <div id="pjax">
   
 
   
@@ -685,11 +754,13 @@ $(document).ready(function() {
     if (document.hidden) {
       rnd = rand () % 7;
       $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
-      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd] + OriginTitile;
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
       clearTimeout(titleTime);
     } else {
       $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
-      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd] + OriginTitile;
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
       titleTime = setTimeout(function() {
         document.title = OriginTitile;
       }, 2000);
@@ -713,5 +784,6 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
+    </div>
 </body>
 </html>
