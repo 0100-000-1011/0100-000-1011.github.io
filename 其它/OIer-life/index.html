@@ -383,7 +383,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -511,7 +511,7 @@
   <p align="center">
     
     &copy; 
-    <span itemprop="copyrightYear">2022</span>
+    <span itemprop="copyrightYear">2023</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -657,6 +657,32 @@ $(document).ready(function() {
     
 
   
+
+
+   
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime, rnd;
+
+  var rand = () => Math.floor (Math.random () * 0x3f3f3f3f);
+
+  document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+      rnd = rand () % 7;
+      $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd] + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd] + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
 
 <script>
 NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
