@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<script type="text/javascript" src="\js\jquery.js"></script>
+
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/animal.jpg">
+  <link rel="mask-icon" href="/images/favicon/animal.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="输入输出重定向可用于更方便地进行输入输出、对拍等操作。 使用 &lt;cstdio&gt; 中的 1FILE * freopen ( const char * filename, const char * mode, FILE * stream );  示例： 12345678910#include &lt;bits&#x2F;stdc++.h&gt;using namespace std;int main">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OI比赛中的一些技巧">
+<meta property="og:url" content="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8A%80%E5%B7%A7/OI-competitions-skills/index.html">
+<meta property="og:site_name" content="Hello World!">
+<meta property="og:description" content="输入输出重定向可用于更方便地进行输入输出、对拍等操作。 使用 &lt;cstdio&gt; 中的 1FILE * freopen ( const char * filename, const char * mode, FILE * stream );  示例： 12345678910#include &lt;bits&#x2F;stdc++.h&gt;using namespace std;int main">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-18T23:50:41.549Z">
+<meta property="article:author" content="EasonLiang">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="比赛">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8A%80%E5%B7%A7/OI-competitions-skills/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OI比赛中的一些技巧 | Hello World!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hello World!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+<link rel="stylesheet" href="/js/aplayer/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script src="/js/aplayer/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/js/aplayer/dist/music.js"></script>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8A%80%E5%B7%A7/OI-competitions-skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/boy.png">
+      <meta itemprop="name" content="EasonLiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OI比赛中的一些技巧
+        </h1>
+          <div class="post-meta">
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+
+                <time title="创建时间：2022-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-01T00:00:00+08:00">2022-10-01</time>
+              </span>
+                <span class="post-meta-item">
+                  <span class="post-meta-item-icon">
+                    <i class="far fa-calendar-check"></i>
+                  </span>
+                  <span class="post-meta-item-text">更新于</span>
+                  <time title="修改时间：2022-12-19 07:50:41" itemprop="dateModified" datetime="2022-12-19T07:50:41+08:00">2022-12-19</time>
+                </span>
+
+            
+
+          </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h2 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h2><p>可用于更方便地进行输入输出、对拍等操作。</p>
+<p>使用 <code>&lt;cstdio&gt;</code> 中的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE * <span class="title">freopen</span> <span class="params">( <span class="type">const</span> <span class="type">char</span> * filename, <span class="type">const</span> <span class="type">char</span> * mode, FILE * stream )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">freopen</span> (<span class="string">&quot;inputFile&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">	<span class="built_in">freopen</span> (<span class="string">&quot;outputFile&quot;</span>,<span class="string">&quot;w&quot;</span>,stdout);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更多见 <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/cstdio/freopen/">https://cplusplus.com/reference/cstdio/freopen/</a></p>
+<h2 id="随机函数"><a href="#随机函数" class="headerlink" title="随机函数"></a>随机函数</h2><p>可用于随机生成数据。</p>
+<ol>
+<li><p><code>rand ()</code> 函数</p>
+<ul>
+<li><p>头文件： <code>&lt;cstdlib&gt;</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 种子函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">srand</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span> seed)</span></span>;</span><br><span class="line"><span class="comment">// 生成函数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">rand</span> <span class="params">(<span class="type">void</span>)</span></span>;</span><br><span class="line"><span class="comment">// 生成数字的最大值（宏）</span></span><br><span class="line">RAND_MAX</span><br></pre></td></tr></table></figure></li>
+<li><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 使用 time () 函数设置随机数种子, 整个程序只需要设置一次 </span></span><br><span class="line">	<span class="built_in">srand</span> ((<span class="type">unsigned</span>)<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 需要用到随机数时，直接调用 rand () 函数 </span></span><br><span class="line">	cout &lt;&lt; <span class="built_in">rand</span> () &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>编写方便，但只能生成较小数字</p>
+</li>
+<li><p>更多见 <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/cstdlib/rand/">https://cplusplus.com/reference/cstdlib/rand/</a></p>
+</li>
+</ul>
+</li>
+<li><p><code>mt19937</code> 类型</p>
+<ul>
+<li><p>头文件： <code>&lt;random&gt;</code></p>
+</li>
+<li><p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 生成一串名为 rand_num 的 mt19937 类型随机数</span></span><br><span class="line">	<span class="function">mt19937 <span class="title">rand_num</span> <span class="params">((<span class="type">unsigned</span>)time(<span class="literal">NULL</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输出此串随机数 </span></span><br><span class="line">	cout &lt;&lt; rand_num &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 设置随机数范围，名为 range </span></span><br><span class="line">	<span class="function">uniform_int_distribution&lt;<span class="type">int</span>&gt; <span class="title">range</span><span class="params">(<span class="number">0</span>,<span class="number">100000</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 在范围内输出一个随机数 </span></span><br><span class="line">	cout &lt;&lt; <span class="built_in">range</span> (rand_num) &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">	<span class="comment">// 可转换为普通类型继续使用 </span></span><br><span class="line">	<span class="type">int</span> n = <span class="built_in">range</span> (rand_num),</span><br><span class="line">		m = <span class="built_in">range</span> (rand_num);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 每次使用 range 生成的数字都不一样 </span></span><br><span class="line">	cout &lt;&lt; n &lt;&lt; endl &lt;&lt; m &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>编写相对复杂，但在需要随机生成大数据时更为有效</p>
+</li>
+<li><p>更多见 <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/random/mt19937/">https://cplusplus.com/reference/random/mt19937/</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="计时函数"><a href="#计时函数" class="headerlink" title="计时函数"></a>计时函数</h2><p>可用于检测程序运行时间、防止（模拟退火之类）程序超时。</p>
+<p>使用 <code>&lt;ctime&gt;</code> 中的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">clock_t</span> <span class="title">clock</span> <span class="params">(<span class="type">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> st = <span class="built_in">clock</span> ();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// do something...</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> ed = <span class="built_in">clock</span> ();</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span> (<span class="string">&quot;time: %.3lfs&quot;</span>,(ed - st) / <span class="number">1000.0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更多见 <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/ctime/clock/">https://cplusplus.com/reference/ctime/clock/</a></p>
+<h2 id="程序对拍"><a href="#程序对拍" class="headerlink" title="程序对拍"></a>程序对拍</h2><p>在windows环境下使用 <code>fc</code> 等批处理命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">比较两个文件或两个文件集并显示它们之间</span><br><span class="line">的不同</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FC [/A] [/C] [/L] [/LBn] [/N] [/OFF[LINE]] [/T] [/U] [/W] [/nnnn]</span><br><span class="line">   [drive1:][path1]filename1 [drive2:][path2]filename2</span><br><span class="line">FC /B [drive1:][path1]filename1 [drive2:][path2]filename2</span><br><span class="line"></span><br><span class="line">  /A         只显示每个不同处的第一行和最后一行。</span><br><span class="line">  /B         执行二进制比较。</span><br><span class="line">  /C         不分大小写。</span><br><span class="line">  /L         将文件作为 ASCII 文字比较。</span><br><span class="line">  /LBn       将连续不匹配的最大值设置为指定</span><br><span class="line">             的行数。</span><br><span class="line">  /N         在 ASCII 比较上显示行数。</span><br><span class="line">  /OFF[LINE] 不要跳过带有脱机属性集的文件。</span><br><span class="line">  /T         不要将制表符扩充到空格。</span><br><span class="line">  /U         将文件作为 UNICODE 文本文件比较。</span><br><span class="line">  /W         为了比较而压缩空白(制表符和空格)。</span><br><span class="line">  /nnnn      指定不匹配处后必须连续</span><br><span class="line">             匹配的行数。</span><br><span class="line">  [drive1:][path1]filename1</span><br><span class="line">             指定要比较的第一个文件或第一个文件集。</span><br><span class="line">  [drive2:][path2]filename2</span><br><span class="line">             指定要比较的第二个文件或第二个文件集。</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<ol>
+<li><p>比较大样例与原程序输出</p>
+<ul>
+<li>准备好大样例文件</li>
+<li>将原程序输出重定向至文件输出</li>
+<li>编写以下代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">system</span> (<span class="string">&quot;fc sample.out program.out&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>观察程序输出</li>
+</ul>
+</li>
+<li><p>暴力程序批量检查输出正确性</p>
+<ul>
+<li><p>准备好原程序与暴力程序，分别编译。</p>
+</li>
+<li><p>编写以下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">10000</span>;++i) &#123;</span><br><span class="line">		<span class="built_in">system</span> (<span class="string">&quot;datamaker.exe &gt;data.in&quot;</span>);</span><br><span class="line">		<span class="built_in">system</span> (<span class="string">&quot;std.exe &lt;data.in &gt;std.out&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="type">double</span> st = <span class="built_in">clock</span> ();</span><br><span class="line"></span><br><span class="line">		<span class="built_in">system</span> (<span class="string">&quot;program.exe &lt;data.in &gt;program.out&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="type">double</span> ed = <span class="built_in">clock</span> ();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">system</span> (<span class="string">&quot;fc std.out program.out&quot;</span>)) &#123;</span><br><span class="line">			<span class="built_in">printf</span> (<span class="string">&quot;WA\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="built_in">printf</span> (<span class="string">&quot;AC #%d Time:%.3lfs\n&quot;</span>,i,(ed - st) / <span class="number">1000</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>观察程序输出</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>注：当文件比较成功时，指令返回 <code>0</code>。</p>
+<h2 id="调整本地栈空间"><a href="#调整本地栈空间" class="headerlink" title="调整本地栈空间"></a>调整本地栈空间</h2><p><em><strong>（尽量不要使用）</strong></em></p>
+<p>在编译选项中加入如下语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Wl,--stack=268435456</span><br></pre></td></tr></table></figure>
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E6%AF%94%E8%B5%9B/" rel="tag"># 比赛</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/number-theory-note/" rel="prev" title="数论学习笔记">
+      <i class="fa fa-chevron-left"></i> 数论学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E6%9D%82%E6%96%87/C202/Dorm-War-I/" rel="next" title="大事记-第一次宿舍大战">
+      大事记-第一次宿舍大战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81Nzc4OC8zNDI1MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">输入输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0"><span class="nav-text">随机函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%87%BD%E6%95%B0"><span class="nav-text">计时函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8B%8D"><span class="nav-text">程序对拍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%9C%AC%E5%9C%B0%E6%A0%88%E7%A9%BA%E9%97%B4"><span class="nav-text">调整本地栈空间</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EasonLiang"
+      src="/images/avatar/boy.png">
+  <p class="site-author-name" itemprop="name">EasonLiang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/0100-000-1011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;0100-000-1011" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://luogu.com.cn/" title="http:&#x2F;&#x2F;luogu.com.cn" rel="noopener" target="_blank">Luogu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://atcoder.jp/" title="http:&#x2F;&#x2F;atcoder.jp&#x2F;" rel="noopener" target="_blank">Atcoder</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://codeforces.com/" title="https:&#x2F;&#x2F;codeforces.com&#x2F;" rel="noopener" target="_blank">Codeforces</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://vjudge.net/" title="https:&#x2F;&#x2F;vjudge.net&#x2F;" rel="noopener" target="_blank">Vjudge</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://poj.org/" title="http:&#x2F;&#x2F;poj.org&#x2F;" rel="noopener" target="_blank">POJ</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+
+
+
+
+<p id="hitokoto" align="center" onclick="find()" ondblclick="count()">
+  <font id="hitokoto_text" size=2>:D 获取中...</font>
+</p>
+
+<script>
+  const hitokoto = document.querySelector('#hitokoto_text')
+  
+  function init () {
+    ++localStorage.clickcount;
+
+    while (--localStorage.clickcount) {
+      localStorage.removeItem (
+        localStorage.clickcount
+      );
+    }
+
+    console.log (localStorage.clickcount);
+    console.log ("clear");
+  }
+
+  function change () {
+    fetch('https://v1.hitokoto.cn')
+      .then(response => response.json())
+      .then(data => {
+        hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)
+  }
+
+  function find () {
+    for (let i = 1; i <= localStorage.clickcount; ++i)
+      console.log (localStorage.getItem (i));    
+  }
+
+  function count () {
+    if (localStorage.clickcount)
+      localStorage.clickcount = 1 +
+      Number(localStorage.clickcount);
+    else localStorage.clickcount = 1;
+
+    localStorage.setItem (
+      localStorage.clickcount,
+      hitokoto.innerText
+    );
+
+    console.log (localStorage.clickcount);
+    console.log (hitokoto.innerText);
+
+    change ();
+  }
+
+  change ();
+</script>
+
+
+<div class="copyright">
+  <p align="center">
+    
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">EasonLiang</span>
+  <br>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <p align="center">
+      <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      <span class="post-meta-divider">|</span>
+      <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <br>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+   
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime, rnd;
+
+  var rand = () => Math.floor (Math.random () * 0x3f3f3f3f);
+
+  document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+      rnd = rand () % 7;
+      $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

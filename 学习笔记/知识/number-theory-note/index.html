@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<script type="text/javascript" src="\js\jquery.js"></script>
+
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/animal.jpg">
+  <link rel="mask-icon" href="/images/favicon/animal.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="质数测试 $O(n^{\frac{1}{2}})$ 时间内测试质数  $O(n^{\frac{1}{3}})$ 时间内测试 Square-free 数 [1]    如果 $n$ 非 Square-free 数, 设 $n &#x3D; p^{2}q$  若 $p \le q$, 则 $p^3 \le p^{2}q &#x3D; n$ , ${p \le n^{\frac{1}{3}}}$ 若 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论学习笔记">
+<meta property="og:url" content="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/number-theory-note/index.html">
+<meta property="og:site_name" content="Hello World!">
+<meta property="og:description" content="质数测试 $O(n^{\frac{1}{2}})$ 时间内测试质数  $O(n^{\frac{1}{3}})$ 时间内测试 Square-free 数 [1]    如果 $n$ 非 Square-free 数, 设 $n &#x3D; p^{2}q$  若 $p \le q$, 则 $p^3 \le p^{2}q &#x3D; n$ , ${p \le n^{\frac{1}{3}}}$ 若 $">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-18T23:50:22.531Z">
+<meta property="article:author" content="EasonLiang">
+<meta property="article:tag" content="OI">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="数论">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/number-theory-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数论学习笔记 | Hello World!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hello World!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+<link rel="stylesheet" href="/js/aplayer/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script src="/js/aplayer/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/js/aplayer/dist/music.js"></script>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/number-theory-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/boy.png">
+      <meta itemprop="name" content="EasonLiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数论学习笔记
+        </h1>
+          <div class="post-meta">
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+
+                <time title="创建时间：2022-10-01 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-01T00:00:00+08:00">2022-10-01</time>
+              </span>
+                <span class="post-meta-item">
+                  <span class="post-meta-item-icon">
+                    <i class="far fa-calendar-check"></i>
+                  </span>
+                  <span class="post-meta-item-text">更新于</span>
+                  <time title="修改时间：2022-12-19 07:50:22" itemprop="dateModified" datetime="2022-12-19T07:50:22+08:00">2022-12-19</time>
+                </span>
+
+            
+
+          </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h2 id="质数测试"><a href="#质数测试" class="headerlink" title="质数测试"></a>质数测试</h2><ul>
+<li><p>$O(n^{\frac{1}{2}})$ 时间内测试质数</p>
+</li>
+<li><p>$O(n^{\frac{1}{3}})$ 时间内测试 <em><strong>Square-free</strong></em> 数 <a href="#note1">[1]</a></p>
+<!-- + 思路:  -->
+
+<blockquote>
+<p>如果 $n$ 非 <em><strong>Square-free</strong></em> 数, 设 $n &#x3D; p^{2}q$</p>
+<ol>
+<li>若 $p \le q$, 则 $p^3 \le p^{2}q &#x3D; n$ , ${p \le n^{\frac{1}{3}}}$</li>
+<li>若 $p &gt; q$, 则 $q^3 &lt; p^{2}q &#x3D; n$ , $q &lt; n^{\frac{1}{3}}$</li>
+</ol>
+</blockquote>
+<ul>
+<li>解法:<ol>
+<li>枚举 $1 &lt; p \le n^{\frac{1}{3}}$ , 测试 $p^2$ 是否整除 $n$</li>
+<li>枚举 $1 \le q &lt; n^{\frac{1}{3}}$ , 测试 $q$ 是否整除 $n$ 且 $\dfrac{n}{q}$ 是否为平方数</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>$O(n^{\frac{1}{2}})$ 内计算 $\sum_ {i &#x3D; 1}^n f\left(\left\lfloor\dfrac{n}{i}\right\rfloor\right)$</p>
+<!-- + 思路:  -->
+
+<blockquote>
+<p>记录 $f\left(1\right)$ ~ $f\left(n\right)$ , 分别乘以在求和中出现的次数</p>
+</blockquote>
+<ul>
+<li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i = n / (n / i) + <span class="number">1</span>)&#123;</span><br><span class="line">    result += <span class="built_in">f</span>(n / i) * (n / i - n / (i + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="质数筛"><a href="#质数筛" class="headerlink" title="质数筛"></a>质数筛</h2><ul>
+<li><p>复杂度近似</p>
+<ul>
+<li>$\lim_ {n\to\infty}\sum_ {i &#x3D; 1}^n {\dfrac{1}{i}} &#x3D; O(\log n)$</li>
+<li>$\lim_ {n\to\infty} \left \vert \mathbb{P} \cap \left[1,n\right] \right \vert &#x3D; O(\dfrac{n}{\log n})$ <a href="#note2">[2]</a></li>
+<li>$\lim_ {n\to\infty}\sum_ {p \in \mathbb{P} \cap \left[1,n\right]} {\dfrac{1}{p}} &#x3D; O(\dfrac{\log n}{\log \log n})$</li>
+</ul>
+</li>
+<li><p>$O(\dfrac{(R - L) \log \sqrt R}{\log \log \sqrt R} + \sqrt R)$ 时间内在 $\left[L, R\right]$ 之间寻找质数</p>
+<blockquote>
+<p>枚举 $\left[2, \sqrt R \right]$ 内的质数进行埃氏筛</p>
+</blockquote>
+</li>
+<li><p>欧拉筛</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; primes;</span><br><span class="line"><span class="type">bool</span> notPrime = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= n;++i)&#123;</span><br><span class="line">    notPrime[i] || primes.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j : primes)&#123;</span><br><span class="line">        <span class="keyword">if</span>((<span class="type">long</span> <span class="type">long</span>)i * j &gt; n) <span class="keyword">break</span>;</span><br><span class="line">        notPrime[i * j] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!(i % j)) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><a id = "2.4"> 给定 $n,k$ , 在 $O(n)$ 内计算 $1^k$ ~ $n^k$ </a></p>
+<blockquote>
+<p>将 $a^k &#x3D; (p_1p_2 \cdots p_q)^k$ $\left(a \notin \mathbb{P}, p_i \in \mathbb{P} \right)$ 转化为计算 $p_ {a_1}^kp_ {a_2}^k \cdots p_ {a_q}^k$ ,</p>
+<p>需实现两个部分:</p>
+<ul>
+<li>快速幂计算 $p_i^k$ , 复杂度 $O(\dfrac{n}{\log n} \log n) &#x3D; O(n)$</li>
+<li>欧拉筛出 $a^k$ , 复杂度 $O(n)$</li>
+</ul>
+<p>总复杂度为 $O(n)$</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="分解因数"><a href="#分解因数" class="headerlink" title="分解因数"></a>分解因数</h2><ul>
+<li><p>因数个数、因数之和</p>
+<p>设 $n &#x3D; \prod_ {i&#x3D;1}^k p_i^{e_i}$ ,</p>
+<p>记 $\sigma_0 \left(n \right)$ 为 $n$ 的因数个数, 有:</p>
+<p>$$<br>\sigma_0 \left(n \right) &#x3D; \prod_ {i&#x3D;1}^k (e_i + 1)<br>$$</p>
+<p>记 $\sigma_1 \left(n \right)$ 为 $n$ 的因数之和, 有:</p>
+<p>$$<br>\sigma_1 \left(n \right) &#x3D; \prod_ {i&#x3D;1}^k \sum_ {j&#x3D;0}^{e_i} p_i^j &#x3D; \prod_ {i&#x3D;1}^k \dfrac{p^{e_i + 1} - 1}{p_i - 1}<br>$$</p>
+<p>当 $\gcd (n,m) &#x3D; 1$ , $\sigma_0 \left(n \right)$ 和 $\sigma_1 \left(n \right)$ 满足如下性质:</p>
+<p>$$<br>\sigma_0 \left(nm \right) &#x3D; \sigma_0 \left(n \right) \sigma_0 \left(m \right)<br>$$</p>
+<p>$$<br>\sigma_1 \left(nm \right) &#x3D; \sigma_1 \left(n \right) \sigma_1 \left(m \right)<br>$$</p>
+<ul>
+<li>在 $O(n)$ 内计算 $\sigma_0 \left(1 \right)$ ~ $\sigma_0 \left(n \right)$ 与 $\sigma_1 \left(1 \right)$ ~ $\sigma_1 \left(n \right)$<blockquote>
+<p>计算 $\sigma_0 \left(p_i \right) , \sigma_1 \left(p_i \right)$ $\left(p_i \in \mathbb{P} \right)$ 的值, 运用如上性质进行欧拉筛, 思路类似于<a href="#2.4">这题</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>给定 $m$ , 求 $\dfrac{1}{x} + \dfrac{1}{y} &#x3D; \dfrac{1}{m}$ 的解</p>
+<!-- + 思路:  -->
+
+<blockquote>
+<p>分解 $m^2$ 的因数进行枚举</p>
+</blockquote>
+<ul>
+<li><p>推理过程:</p>
+<p>$$<br>\dfrac{1}{x} + \dfrac{1}{y} &#x3D; \dfrac{1}{m}<br>$$</p>
+<p>$$<br>\implies xm + ym &#x3D; xy<br>$$</p>
+<p>$$<br>\implies xm + ym - xy + m^2 &#x3D; m^2<br>$$</p>
+<p>$$<br>\implies (x - m)(m - y) &#x3D; m^2 \\<br>$$</p>
+</li>
+<li><p><em><strong>Tips: $(x - m)$ , $(m - y)$ 可以为负数</strong></em></p>
+</li>
+</ul>
+</li>
+<li><p>通过分解质因数求 $gcd$ 和 $lcm$</p>
+<p>设 $n &#x3D; \prod_ {i&#x3D;1}^k p_i^{e_i} , m &#x3D; \prod_ {i&#x3D;1}^k p_i^{f_i}$ , 则:</p>
+<p>$$<br>\gcd (n,m) &#x3D; \prod_ {i&#x3D;1}^k p_i^{\min (e_i,f_i)}<br>$$</p>
+<p>$$<br>\operatorname{lcm} (n,m) &#x3D; \prod_ {i&#x3D;1}^k p_i^{\max (e_i,f_i)}<br>$$</p>
+</li>
+</ul>
+<h2 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h2><ul>
+<li><p>解 $ax + by &#x3D; c$ $($有整数解当且仅当 $\gcd (a, b) \mid c$$)$</p>
+<ol>
+<li>当 $b &#x3D; 0$ , $\begin{cases} x &#x3D; \dfrac{c}{a} \\ y &#x3D; 0 \end{cases}$<br>为方程的一组整数解</li>
+<li>当 $b &gt; 0$ , 令:</li>
+</ol>
+<p>$$<br>\begin{cases} a’ &#x3D; b \\ b’ &#x3D; a \bmod b &#x3D; a - a &#x2F; b * b \end{cases}<br>$$</p>
+<p>求得 $a’x + b’y &#x3D; c$ 的一组整数解<br>$\begin{cases} x &#x3D; x’ \\ y &#x3D; y’ \end{cases}$<br>, 则</p>
+<p>$$<br>x’ + b’y’ &#x3D; c<br>$$</p>
+<p>$$<br>\implies bx’ + (a - a &#x2F; b * b)y’ &#x3D; c<br>$$</p>
+<p>$$<br>\implies bx’ + ay’ - (a &#x2F; b * b)y’ &#x3D; c<br>$$</p>
+<p>$$<br>\implies ay’ - b(x’ - (a &#x2F; b)y’) &#x3D; c<br>$$</p>
+<p>$$<br>\implies \begin{cases} x &#x3D; y’ \\ y &#x3D; x’ - (a &#x2F; b)y’ \end{cases}<br>$$</p>
+<p>此为 $ax + by &#x3D; c$ 的一组整数解</p>
+<ul>
+<li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">exgcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c, <span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!b)&#123;</span><br><span class="line">    x = c / a; y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(c % a) x = y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> a; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> gcd = <span class="built_in">exgcd</span>(b, a % b, c, x, y);</span><br><span class="line">  x = x - (a / b - <span class="number">1</span>) * y;</span><br><span class="line">  y = x - y; x = x - y;</span><br><span class="line">  <span class="keyword">return</span> gcd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>由特解推广至通解</p>
+<p>假设其中一组整数解为</p>
+<p>$$<br>\begin{cases} x &#x3D; x_0 \\ y &#x3D; y_0 \end{cases}<br>$$</p>
+<p>则</p>
+<p>$$<br>\begin{cases} x &#x3D; x_0 + \dfrac{b}{\gcd (a,b)}t \\ y &#x3D; y_0 - \dfrac{a}{\gcd (a,b)}t \end{cases} , t \in \mathbb{Z}<br>$$</p>
+<p>为该方程的所有整数解</p>
+</li>
+<li><p>解 $ax \equiv c \pmod m$</p>
+<blockquote>
+<p>等价于解 $ax - my &#x3D; b$</p>
+</blockquote>
+<p>当 $c &#x3D; 1$ 时, $x$ 为 $a$ 在模 $p$ 意义下的乘法逆元, 记作 $a^{-1}$</p>
+</li>
+</ul>
+<h2 id="求乘法逆元"><a href="#求乘法逆元" class="headerlink" title="求乘法逆元"></a>求乘法逆元</h2><ul>
+<li><p>拓展欧几里得算法</p>
+<ul>
+<li>优点: 当 $a \bot p$ (互质), 但 $p$ 不是质数时同样适用</li>
+<li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">exgcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b) x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">exgcd</span>(b, a % b, y, x), y -= a / b * x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> x, y;</span><br><span class="line">    <span class="built_in">exgcd</span>(a, p, x, y);</span><br><span class="line">    x = (x % p + p) % p;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>费马小定理+快速幂算法</p>
+<p>$$<br>a^{p - 1} \equiv 1 \pmod p<br>$$</p>
+<p>故有</p>
+<p>$$<br>a * x \equiv 1 \pmod p<br>$$</p>
+<p>$$<br>\implies a * x \equiv a ^ {p-1} \pmod p<br>$$</p>
+<p>$$<br>\implies x \equiv a^{p-2} \pmod p<br>$$</p>
+<ul>
+<li>优点: 较扩展欧几里得算法更易实现</li>
+<li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fpm</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> p, <span class="type">int</span> m)</span></span>&#123;</span><br><span class="line">    x %= m;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(;p;p &gt;&gt;= <span class="number">1</span>, (x *= x) %= m)</span><br><span class="line">        <span class="keyword">if</span>(p &amp; <span class="number">1</span>) (ans *= x) %= m;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="built_in">fpm</span>(a, p - <span class="number">2</span>, p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>线性算法</p>
+<p>$$<br>1^{-1}\equiv 1 \pmod p<br>$$</p>
+<p>设</p>
+<p>$$<br>p &#x3D; k * i + r, 1 &lt; r &lt; i &lt; p<br>$$</p>
+<p>有</p>
+<p>$$<br>k * i + r \equiv 0 \pmod p<br>$$</p>
+<p>$$<br>\implies k * r^{-1} + i^{-1} \equiv 0 \pmod p<br>$$</p>
+<p>$$<br>\implies i^{-1} \equiv -k * r^{-1} \pmod p<br>$$</p>
+<p>$$<br>\implies i^{-1} \equiv -\lfloor \frac{p}{i} \rfloor * (p \bmod i)^{-1} \pmod p<br>$$</p>
+<ul>
+<li>优点:<ul>
+<li>$O(\log a)$ 内计算 $a^{-1}$</li>
+<li>$O(n)$ 内计算 $1^{-1}$ ~ $n^{-1}$</li>
+</ul>
+</li>
+<li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归计算</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">inv</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i ^ <span class="number">1</span> ? (<span class="type">long</span> <span class="type">long</span>)(p - p / i) * <span class="built_in">inv</span>(p % i) % p : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动规计算</span></span><br><span class="line">inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt; p;++i)</span><br><span class="line">    inv[i] = (<span class="type">long</span> <span class="type">long</span>)(p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="勒让德公式"><a href="#勒让德公式" class="headerlink" title="勒让德公式"></a>勒让德公式</h2><ul>
+<li><p>记 $e_p \left(n \right)$ 为 $n!$ 中 $p$ 的指数:</p>
+<p>$$<br>e_p \left(n \right) &#x3D; \sum_ {1 \le k} \lfloor \dfrac{n}{p^k} \rfloor &#x3D; \lfloor \dfrac{n}{p} \rfloor + \lfloor \dfrac{n}{p^2} \rfloor + \cdots<br>$$</p>
+</li>
+<li><p>给定 $n, m, p, k$ , 其中 $p$ 为质数, 检查 $\dbinom{n}{m}$ 是否被 $p^k$ 整除</p>
+<blockquote>
+<p>即检查 $e_p\dbinom{n}{m}$ 是否 $\ge k$</p>
+</blockquote>
+</li>
+<li><p>对于 $p$ 为质数, $0 &lt; i &lt; p$ 有:</p>
+<p>$$<br>\dbinom{p}{i} \equiv 0 \pmod p<br>$$</p>
+<ul>
+<li>证明:<br>$$<br>e_p\dbinom{p}{i} &#x3D; e_p\dbinom{p!}{i!(p - i)!} &#x3D; e_p(p) - e_p(i) - e_p(p - i) &#x3D; 1 - 0 - 0 &#x3D; 1<br>$$</li>
+<li>重要推论:<br>$$<br>(1 + z)^p \equiv 1 + z^p \pmod p<br>$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><font size = 2>
+
+<p><a id = "note1"> [1]: <em><strong>Square-free</strong></em> 数, 指没有平方因子的数 </a></p>
+<p><a id = "note2"> [2]: $\mathbb{P}$ 表示质数集合, 下同 </a></p>
+</font>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OI/" rel="tag"># OI</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E6%9D%82%E6%96%87/%E8%AF%97/Fishing/" rel="prev" title="钓鱼">
+      <i class="fa fa-chevron-left"></i> 钓鱼
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8A%80%E5%B7%A7/OI-competitions-skills/" rel="next" title="OI比赛中的一些技巧">
+      OI比赛中的一些技巧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81Nzc4OC8zNDI1MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E6%B5%8B%E8%AF%95"><span class="nav-text">质数测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0%E7%AD%9B"><span class="nav-text">质数筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A7%A3%E5%9B%A0%E6%95%B0"><span class="nav-text">分解因数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-text">拓展欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83"><span class="nav-text">求乘法逆元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%92%E8%AE%A9%E5%BE%B7%E5%85%AC%E5%BC%8F"><span class="nav-text">勒让德公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-text">注释</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EasonLiang"
+      src="/images/avatar/boy.png">
+  <p class="site-author-name" itemprop="name">EasonLiang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/0100-000-1011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;0100-000-1011" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://luogu.com.cn/" title="http:&#x2F;&#x2F;luogu.com.cn" rel="noopener" target="_blank">Luogu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://atcoder.jp/" title="http:&#x2F;&#x2F;atcoder.jp&#x2F;" rel="noopener" target="_blank">Atcoder</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://codeforces.com/" title="https:&#x2F;&#x2F;codeforces.com&#x2F;" rel="noopener" target="_blank">Codeforces</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://vjudge.net/" title="https:&#x2F;&#x2F;vjudge.net&#x2F;" rel="noopener" target="_blank">Vjudge</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://poj.org/" title="http:&#x2F;&#x2F;poj.org&#x2F;" rel="noopener" target="_blank">POJ</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+
+
+
+
+<p id="hitokoto" align="center" onclick="find()" ondblclick="count()">
+  <font id="hitokoto_text" size=2>:D 获取中...</font>
+</p>
+
+<script>
+  const hitokoto = document.querySelector('#hitokoto_text')
+  
+  function init () {
+    ++localStorage.clickcount;
+
+    while (--localStorage.clickcount) {
+      localStorage.removeItem (
+        localStorage.clickcount
+      );
+    }
+
+    console.log (localStorage.clickcount);
+    console.log ("clear");
+  }
+
+  function change () {
+    fetch('https://v1.hitokoto.cn')
+      .then(response => response.json())
+      .then(data => {
+        hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)
+  }
+
+  function find () {
+    for (let i = 1; i <= localStorage.clickcount; ++i)
+      console.log (localStorage.getItem (i));    
+  }
+
+  function count () {
+    if (localStorage.clickcount)
+      localStorage.clickcount = 1 +
+      Number(localStorage.clickcount);
+    else localStorage.clickcount = 1;
+
+    localStorage.setItem (
+      localStorage.clickcount,
+      hitokoto.innerText
+    );
+
+    console.log (localStorage.clickcount);
+    console.log (hitokoto.innerText);
+
+    change ();
+  }
+
+  change ();
+</script>
+
+
+<div class="copyright">
+  <p align="center">
+    
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">EasonLiang</span>
+  <br>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <p align="center">
+      <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      <span class="post-meta-divider">|</span>
+      <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <br>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+   
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime, rnd;
+
+  var rand = () => Math.floor (Math.random () * 0x3f3f3f3f);
+
+  document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+      rnd = rand () % 7;
+      $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<script type="text/javascript" src="\js\jquery.js"></script>
+
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/animal.jpg">
+  <link rel="mask-icon" href="/images/favicon/animal.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Markdown以上是一级标题 基本语法以上是二级标题 三级标题四级标题五级标题六级标题粗体1 粗体2 斜体1 斜体2  引用块  引用有序列表 引用有序列表 引用有序列表   引用无序列表 引用无序列表 引用无序列表   嵌套引用块嵌套引用块嵌套引用块    有序列表 嵌套有序列表 嵌套有序列表 嵌套有序列表 嵌套有序列表   嵌套有序列表 嵌套无序列表 嵌套无序列表 嵌套无序列表   嵌套有序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面显示测试">
+<meta property="og:url" content="http://example.com/%E5%85%B6%E5%AE%83/page-test/index.html">
+<meta property="og:site_name" content="Hello World!">
+<meta property="og:description" content="Markdown以上是一级标题 基本语法以上是二级标题 三级标题四级标题五级标题六级标题粗体1 粗体2 斜体1 斜体2  引用块  引用有序列表 引用有序列表 引用有序列表   引用无序列表 引用无序列表 引用无序列表   嵌套引用块嵌套引用块嵌套引用块    有序列表 嵌套有序列表 嵌套有序列表 嵌套有序列表 嵌套有序列表   嵌套有序列表 嵌套无序列表 嵌套无序列表 嵌套无序列表   嵌套有序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.seovx.com/d/?mom=302">
+<meta property="og:image" content="https://moe.jitsu.top/img/">
+<meta property="article:published_time" content="1999-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="1999-12-31T16:00:00.000Z">
+<meta property="article:author" content="EasonLiang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.seovx.com/d/?mom=302">
+
+<link rel="canonical" href="http://example.com/%E5%85%B6%E5%AE%83/page-test/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>页面显示测试 | Hello World!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hello World!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+<link rel="stylesheet" href="/js/aplayer/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script src="/js/aplayer/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/js/aplayer/dist/music.js"></script>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%85%B6%E5%AE%83/page-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/boy.png">
+      <meta itemprop="name" content="EasonLiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          页面显示测试
+        </h1>
+          <div class="post-meta">
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+
+                <time title="创建时间：2000-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2000-01-01T00:00:00+08:00">2000-01-01</time>
+              </span>
+
+            
+
+          </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><p>以上是一级标题</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>以上是二级标题</p>
+<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p><strong>粗体1</strong> <strong>粗体2</strong></p>
+<p><em>斜体1</em> <em>斜体2</em></p>
+<blockquote>
+<p>引用块</p>
+<ol>
+<li>引用有序列表</li>
+<li>引用有序列表</li>
+<li>引用有序列表</li>
+</ol>
+<ul>
+<li>引用无序列表</li>
+<li>引用无序列表</li>
+<li>引用无序列表</li>
+</ul>
+<blockquote>
+<p>嵌套引用块<br>嵌套引用块<br>嵌套引用块</p>
+</blockquote>
+</blockquote>
+<ol>
+<li>有序列表<ol>
+<li>嵌套有序列表<ol>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+</ol>
+</li>
+<li>嵌套有序列表<ul>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+</ul>
+</li>
+<li>嵌套有序列表<blockquote>
+<p>嵌套引用块</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>有序列表<ul>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+</ul>
+</li>
+<li>有序列表<blockquote>
+<p>嵌套引用块</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>无序列表<ul>
+<li>嵌套无序列表<ul>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+<li>嵌套无序列表</li>
+</ul>
+</li>
+<li>嵌套无序列表<ol>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+</ol>
+</li>
+<li>嵌套无序列表<blockquote>
+<p>嵌套引用块</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>无序列表<ol>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+<li>嵌套有序列表</li>
+</ol>
+</li>
+<li>无序列表<blockquote>
+<p>嵌套引用块</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>无序列表 (-)</li>
+<li>无序列表 (-)</li>
+<li>无序列表 (-)</li>
+</ul>
+<ul>
+<li>无序列表 (+)</li>
+<li>无序列表 (+)</li>
+<li>无序列表 (+)</li>
+</ul>
+<ul>
+<li>无序列表 (*)</li>
+<li>无序列表 (*)</li>
+<li>无序列表 (*)</li>
+</ul>
+<p><code>行内代码块</code><br><code>行内代码块包裹 `反引号`</code></p>
+<p>以下是分割线</p>
+<hr>
+<hr>
+<hr>
+<p>以上是分割线</p>
+<p>这是一个<a target="_blank" rel="noopener" href="https://markdown.com.cn/">链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://markdown.com.cn/" title="Markdown语法">链接</a> 悬停显示文字</p>
+<p>这也是一个链接 <a target="_blank" rel="noopener" href="https://markdown.com.cn/">https://markdown.com.cn/</a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://markdown.com.cn/">粗体</a></strong> 链接</p>
+<p><em><a target="_blank" rel="noopener" href="https://markdown.com.cn/">斜体</a></em> 链接</p>
+<p><a target="_blank" rel="noopener" href="https://markdown.com.cn/"><code>代码</code></a> 链接</p>
+<p><a target="_blank" rel="noopener" href="https://markdown.com.cn/" title="Markdown语法">引用类型链接</a></p>
+<p><img src="https://cdn.seovx.com/d/?mom=302" alt="图片"></p>
+<p>以上是图片</p>
+<p><a target="_blank" rel="noopener" href="https://markdown.com.cn/"><img src="https://moe.jitsu.top/img/" alt="链接图片"></a></p>
+<p>以上是链接图片</p>
+<h2 id="扩展语法"><a href="#扩展语法" class="headerlink" title="扩展语法"></a>扩展语法</h2><table>
+<thead>
+<tr>
+<th>表格</th>
+<th>默认</th>
+<th align="left">左对齐</th>
+<th align="center">居中对齐</th>
+<th align="right">右对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>行1</td>
+<td>列1</td>
+<td align="left">列2</td>
+<td align="center">列3</td>
+<td align="right">列4</td>
+</tr>
+<tr>
+<td>行2</td>
+<td>列1</td>
+<td align="left">列2</td>
+<td align="center">列3</td>
+<td align="right">列4</td>
+</tr>
+<tr>
+<td>行3</td>
+<td>列1</td>
+<td align="left">列2</td>
+<td align="center">列3</td>
+<td align="right">列4</td>
+</tr>
+<tr>
+<td>行4</td>
+<td>列1</td>
+<td align="left">列2</td>
+<td align="center">列3</td>
+<td align="right">列4</td>
+</tr>
+</tbody></table>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 围栏代码块</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="built_in">printf</span> (<span class="string">&quot;HELLO WORLD!&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<!-- 脚注[^foot] -->
+<dl>
+<dt>定义列表</dt>
+<dd>定义内容</dd>
+
+<dd>定义内容</dd>
+
+<dd>定义内容</dd>
+
+</dl>
+~~删除线~~
+
+<p>任务列表</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 已完成</li>
+<li><input disabled="" type="checkbox"> 未完成</li>
+<li><input disabled="" type="checkbox"> 未完成</li>
+</ul>
+<p>自动网址链接: <a target="_blank" rel="noopener" href="https://markdown.com.cn/">https://markdown.com.cn/</a><br>禁用自动网址: <code>https://markdown.com.cn/</code></p>
+<h1 id="LaTeX"><a href="#LaTeX" class="headerlink" title="$\LaTeX$"></a>$\LaTeX$</h1><h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><p>$ 普通公式 $</p>
+<p>$ \begin{aligned} 普通 \\ 换行 \end{aligned} $ </p>
+<p>$$ 居中公式 $$</p>
+<p>$$ \begin{aligned} 居中 \\ 换行 \end{aligned} $$</p>
+<h2 id="初等运算"><a href="#初等运算" class="headerlink" title="初等运算"></a>初等运算</h2><p>$$<br>\begin{align*}<br>a + b \ \ \ \ a - b \ \ \ \ a \times b \ \ \ \ a \div b \\<br>a \cdot b \ \ \ a^b \ \ \sqrt[b]{a} \ \ \ \log_a b \ \ \exp_a b<br>\end{align*}<br>$$</p>
+<p>$$<br>\sin x \ \ \cos x \ \ \tan x \ \ \sec x \ \ \csc x \ \ \cot x<br>$$</p>
+<p>$$<br>\arcsin x \ \ \arccos x \ \ \arctan x \\<br>$$</p>
+<h2 id="求和求积公式"><a href="#求和求积公式" class="headerlink" title="求和求积公式"></a>求和求积公式</h2><p>$$<br>\sum_ {k&#x3D;1}^n k &#x3D; \frac{1}{2} n (n+1)<br>$$</p>
+<p>$$<br>\sin z &#x3D; z \prod_ {k&#x3D;1}^{\infty} \left(1-\dfrac{z^2}{k^2\pi^2}\right)<br>$$</p>
+<h2 id="矩阵行列式"><a href="#矩阵行列式" class="headerlink" title="矩阵行列式"></a>矩阵行列式</h2><p>$$<br>\begin{gather*}<br>\begin{matrix} 0 &amp; 1 \\ 1 &amp; 0 \end{matrix}\quad<br>\begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}\\<br>\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}\quad<br>\begin{Bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{Bmatrix}\\<br>\begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix}\quad<br>\begin{Vmatrix} i &amp; 0 \\ 0 &amp; -i \end{Vmatrix}<br>\end{gather*}<br>$$</p>
+<h2 id="积分"><a href="#积分" class="headerlink" title="积分"></a>积分</h2><h3 id="定积分"><a href="#定积分" class="headerlink" title="定积分"></a>定积分</h3><p>$$ \mathop {\int} \nolimits _a^b f { \left( {x} \right) } \text{d} x &#x3D; -\mathop {\int} \nolimits _b^a f { \left( {x} \right) } \text{d} x $$</p>
+<h3 id="不定积分"><a href="#不定积分" class="headerlink" title="不定积分"></a>不定积分</h3><p>$$<br>\begin{align*}<br>&amp; \int k \text{d} x &#x3D; kx + C \\<br>&amp; \int \mathop{x} ^{\mu} \text{d} x &#x3D; \frac{ \mathop{x} ^{\mu + 1} }{\mu + 1} + C, \ \mu \neq -1 \\<br>&amp; \int \frac{1}{x} \text{d} x &#x3D; \ln { \left| {x} \right| } + C \\<br>&amp; \int \frac{1}{1 + \mathop{x}^2} \text{d} x &#x3D; \arctan x + C\\<br>&amp; \int \frac{1}{\sqrt{1 - \mathop{x}^2}} \text{d} x &#x3D; \arcsin x + C<br>\end{align*}<br>$$</p>
+<h3 id="曲线积分"><a href="#曲线积分" class="headerlink" title="曲线积分"></a>曲线积分</h3><p>$$<br>\begin{align*}<br>&amp; {L&#x3D;\mathop{L}\nolimits_ { {1} }+\mathop{L}\nolimits_2 \Rightarrow \mathop{ \int }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s&#x3D;\mathop{ \int }\nolimits_ { {\mathop{L}\nolimits_ { {1} } } }f{ \left( {x,y} \right) } \text{d} s+\mathop{ \int }\nolimits_ { {\mathop{L}\nolimits_2} }f{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; {\mathop{ \iint }\nolimits_ {L}{ \left[ { \alpha f{ \left( {x,y} \right) }+ \beta f{ \left( {x,y} \right) } } \right] } \text{d} s&#x3D; \alpha \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s+ \beta \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; {f{ \left( {x,y} \right) } \le g{ \left( {x,y} \right) } \Rightarrow \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s \le \mathop{ \iint }\nolimits_ {L}g{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; { \left| {\mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s} \left|  \le \mathop{ \iint }\nolimits_ {L}{ \left| {f{ \left( {x,y} \right) } } \right| } \text{d} s\right. \right. }<br>\end{align*}<br>$$</p>
+<!--
+
+# 其它
+
+## HTML 代码块
+
+<details class="custom-block details" style="display: block; position: relative; border-radius: 2px; margin: 1.6em 0px; padding: 1.6em; background-color: rgb(238, 238, 238); color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><summary style="outline: none; cursor: pointer;">Code (C++)</summary><pre><code class="language-cpp">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="built_in">printf</span> (<span class="string">&quot;HELLO WORLD!&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p></code></pre></details></p>
+<p>–&gt;</p>
+<!-- [^foot]: 这是脚注。 -->
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E5%85%B6%E5%AE%83/OIer-life/" rel="prev" title="OIer人生">
+      <i class="fa fa-chevron-left"></i> OIer人生
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E6%9D%82%E6%96%87/%E8%AF%97/Fishing/" rel="next" title="钓鱼">
+      钓鱼 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81Nzc4OC8zNDI1MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown"><span class="nav-text">Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="nav-text">扩展语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LaTeX"><span class="nav-text">$\LaTeX$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="nav-text">基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E8%BF%90%E7%AE%97"><span class="nav-text">初等运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%92%8C%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-text">求和求积公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-text">矩阵行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E5%88%86"><span class="nav-text">积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E7%A7%AF%E5%88%86"><span class="nav-text">曲线积分</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EasonLiang"
+      src="/images/avatar/boy.png">
+  <p class="site-author-name" itemprop="name">EasonLiang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/0100-000-1011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;0100-000-1011" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://luogu.com.cn/" title="http:&#x2F;&#x2F;luogu.com.cn" rel="noopener" target="_blank">Luogu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://atcoder.jp/" title="http:&#x2F;&#x2F;atcoder.jp&#x2F;" rel="noopener" target="_blank">Atcoder</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://codeforces.com/" title="https:&#x2F;&#x2F;codeforces.com&#x2F;" rel="noopener" target="_blank">Codeforces</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://vjudge.net/" title="https:&#x2F;&#x2F;vjudge.net&#x2F;" rel="noopener" target="_blank">Vjudge</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://poj.org/" title="http:&#x2F;&#x2F;poj.org&#x2F;" rel="noopener" target="_blank">POJ</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+
+
+
+
+<p id="hitokoto" align="center" onclick="find()" ondblclick="count()">
+  <font id="hitokoto_text" size=2>:D 获取中...</font>
+</p>
+
+<script>
+  const hitokoto = document.querySelector('#hitokoto_text')
+  
+  function init () {
+    ++localStorage.clickcount;
+
+    while (--localStorage.clickcount) {
+      localStorage.removeItem (
+        localStorage.clickcount
+      );
+    }
+
+    console.log (localStorage.clickcount);
+    console.log ("clear");
+  }
+
+  function change () {
+    fetch('https://v1.hitokoto.cn')
+      .then(response => response.json())
+      .then(data => {
+        hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)
+  }
+
+  function find () {
+    for (let i = 1; i <= localStorage.clickcount; ++i)
+      console.log (localStorage.getItem (i));    
+  }
+
+  function count () {
+    if (localStorage.clickcount)
+      localStorage.clickcount = 1 +
+      Number(localStorage.clickcount);
+    else localStorage.clickcount = 1;
+
+    localStorage.setItem (
+      localStorage.clickcount,
+      hitokoto.innerText
+    );
+
+    console.log (localStorage.clickcount);
+    console.log (hitokoto.innerText);
+
+    change ();
+  }
+
+  change ();
+</script>
+
+
+<div class="copyright">
+  <p align="center">
+    
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">EasonLiang</span>
+  <br>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <p align="center">
+      <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      <span class="post-meta-divider">|</span>
+      <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <br>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+   
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime, rnd;
+
+  var rand = () => Math.floor (Math.random () * 0x3f3f3f3f);
+
+  document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+      rnd = rand () % 7;
+      $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
