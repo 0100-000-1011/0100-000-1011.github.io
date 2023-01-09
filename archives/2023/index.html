@@ -3,6 +3,40 @@
 
 <script type="text/javascript" src="\js\jquery.js"></script>
 
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -75,10 +109,15 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
+
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -172,13 +211,33 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 8 篇文章。 继续努力。</span>
+        <span class="collection-header">嗯..! 目前共计 10 篇文章。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2023</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2023-01-03T00:00:00+08:00"
+              content="2023-01-03">
+          01-03
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/summation-note/" itemprop="url">
+            <span itemprop="name">数列学习笔记</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -278,7 +337,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -291,7 +350,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -3,6 +3,40 @@
 
 <script type="text/javascript" src="\js\jquery.js"></script>
 
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -75,10 +109,15 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
+
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -206,7 +245,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-04 20:23:50" itemprop="dateModified" datetime="2023-01-04T20:23:50+08:00">2023-01-04</time>
+                <time title="修改时间：2023-01-09 11:18:51" itemprop="dateModified" datetime="2023-01-09T11:18:51+08:00">2023-01-09</time>
               </span>
 
           
@@ -221,6 +260,8 @@
 
         
             <!-- <script src='https://api.vvhan.com/api/snow'></script> -->
+
+<script type="text/javascript" src='/js/darkmode/prior-darkmode.js' data-pjax></script>
 
 <!DOCTYPE html>
 <html>
@@ -385,7 +426,11 @@ function splode(x,y,z){
     }
     d=Math.sqrt((x-playerX)*(x-playerX)+(y-playerY)*(y-playerY)+(z-playerZ)*(z-playerZ));
     pow.volume=1.5/(1+d/10);
-    if (sound) pow.play();
+    if (sound) {
+        var resp = pow.play();
+        if (resp !== undefined)
+            resp.then(_ => {}).catch(error => {});
+    }
 }
 function doLogic(){    
     if(seedTimer<frames){
@@ -531,13 +576,13 @@ function frame(){
 //     cy=canvas.height/2;
 // });
 window.addEventListener('pjax:success', () => {
-    sound = false; stop = path != location.pathname;
+    sound = false;
+    if (path != location.pathname) stop = true;
 });
 initVars();
 frame();
 }
 </script>
-
 
 </body>
 </html>
@@ -762,7 +807,7 @@ frame();
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -775,7 +820,7 @@ frame();
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

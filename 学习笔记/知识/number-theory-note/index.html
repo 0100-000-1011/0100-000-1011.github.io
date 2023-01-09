@@ -3,6 +3,40 @@
 
 <script type="text/javascript" src="\js\jquery.js"></script>
 
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -83,10 +117,15 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
+
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,7 +284,7 @@
 </li>
 </ul>
 </li>
-<li><p>$O(n^{\frac{1}{2}})$ 内计算 $\sum_{i &#x3D; 1}^n f\left(\left\lfloor\dfrac{n}{i}\right\rfloor\right)$</p>
+<li><p>$O(n^{\frac{1}{2}})$ 内计算 $\sum_ {i &#x3D; 1}^n f\left(\left\lfloor\dfrac{n}{i}\right\rfloor\right)$</p>
 <!-- + 思路:  -->
 
 <blockquote>
@@ -259,9 +298,9 @@
 <h2 id="质数筛"><a href="#质数筛" class="headerlink" title="质数筛"></a>质数筛</h2><ul>
 <li><p>复杂度近似</p>
 <ul>
-<li>$\lim_{n\to\infty}\sum_{i &#x3D; 1}^n {\dfrac{1}{i}} &#x3D; O(\log n)$</li>
-<li>$\lim_{n\to\infty} \left \vert \mathbb{P} \cap \left[1,n\right] \right \vert &#x3D; O(\dfrac{n}{\log n})$ <a href="#note2">[2]</a></li>
-<li>$\lim_{n\to\infty}\sum_{p \in \mathbb{P} \cap \left[1,n\right]} {\dfrac{1}{p}} &#x3D; O(\dfrac{\log n}{\log \log n})$</li>
+<li>$\lim_ {n\to\infty}\sum_ {i &#x3D; 1}^n {\dfrac{1}{i}} &#x3D; O(\log n)$</li>
+<li>$\lim_ {n\to\infty} \left \vert \mathbb{P} \cap \left[1,n\right] \right \vert &#x3D; O(\dfrac{n}{\log n})$ <a href="#note2">[2]</a></li>
+<li>$\lim_ {n\to\infty}\sum_ {p \in \mathbb{P} \cap \left[1,n\right]} {\dfrac{1}{p}} &#x3D; O(\dfrac{\log n}{\log \log n})$</li>
 </ul>
 </li>
 <li><p>$O(\dfrac{(R - L) \log \sqrt R}{\log \log \sqrt R} + \sqrt R)$ 时间内在 $\left[L, R\right]$ 之间寻找质数</p>
@@ -273,7 +312,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; primes;</span><br><span class="line"><span class="type">bool</span> notPrime = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= n;++i)&#123;</span><br><span class="line">    notPrime[i] || primes.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j : primes)&#123;</span><br><span class="line">        <span class="keyword">if</span>((<span class="type">long</span> <span class="type">long</span>)i * j &gt; n) <span class="keyword">break</span>;</span><br><span class="line">        notPrime[i * j] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!(i % j)) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p><a id = "2.4"> 给定 $n,k$ , 在 $O(n)$ 内计算 $1^k$ ~ $n^k$ </a></p>
 <blockquote>
-<p>将 $a^k &#x3D; (p_1p_2 \cdots p_q)^k$ $\left(a \notin \mathbb{P}, p_i \in \mathbb{P} \right)$ 转化为计算 $p_{a_1}^kp_{a_2}^k \cdots p_{a_q}^k$ ,</p>
+<p>将 $a^k &#x3D; (p_1p_2 \cdots p_q)^k$ $\left(a \notin \mathbb{P}, p_i \in \mathbb{P} \right)$ 转化为计算 $p_ {a_1}^kp_ {a_2}^k \cdots p_ {a_q}^k$ ,</p>
 <p>需实现两个部分:</p>
 <ul>
 <li>快速幂计算 $p_i^k$ , 复杂度 $O(\dfrac{n}{\log n} \log n) &#x3D; O(n)$</li>
@@ -285,11 +324,11 @@
 </ul>
 <h2 id="分解因数"><a href="#分解因数" class="headerlink" title="分解因数"></a>分解因数</h2><ul>
 <li><p>因数个数、因数之和</p>
-<p>设 $n &#x3D; \prod_{i&#x3D;1}^k p_i^{e_i}$ ,</p>
+<p>设 $n &#x3D; \prod_ {i&#x3D;1}^k p_i^{e_i}$ ,</p>
 <p>记 $\sigma_0 \left(n \right)$ 为 $n$ 的因数个数, 有:</p>
-<p>$$<br>\sigma_0 \left(n \right) &#x3D; \prod_{i&#x3D;1}^k (e_i + 1)<br>$$</p>
+<p>$$<br>\sigma_0 \left(n \right) &#x3D; \prod_ {i&#x3D;1}^k (e_i + 1)<br>$$</p>
 <p>记 $\sigma_1 \left(n \right)$ 为 $n$ 的因数之和, 有:</p>
-<p>$$<br>\sigma_1 \left(n \right) &#x3D; \prod_{i&#x3D;1}^k \sum_{j&#x3D;0}^{e_i} p_i^j &#x3D; \prod_{i&#x3D;1}^k \dfrac{p^{e_i + 1} - 1}{p_i - 1}<br>$$</p>
+<p>$$<br>\sigma_1 \left(n \right) &#x3D; \prod_ {i&#x3D;1}^k \sum_ {j&#x3D;0}^{e_i} p_i^j &#x3D; \prod_ {i&#x3D;1}^k \dfrac{p^{e_i + 1} - 1}{p_i - 1}<br>$$</p>
 <p>当 $\gcd (n,m) &#x3D; 1$ , $\sigma_0 \left(n \right)$ 和 $\sigma_1 \left(n \right)$ 满足如下性质:</p>
 <p>$$<br>\sigma_0 \left(nm \right) &#x3D; \sigma_0 \left(n \right) \sigma_0 \left(m \right)<br>$$</p>
 <p>$$<br>\sigma_1 \left(nm \right) &#x3D; \sigma_1 \left(n \right) \sigma_1 \left(m \right)<br>$$</p>
@@ -311,31 +350,31 @@
 <p>$$<br>\dfrac{1}{x} + \dfrac{1}{y} &#x3D; \dfrac{1}{m}<br>$$</p>
 <p>$$<br>\implies xm + ym &#x3D; xy<br>$$</p>
 <p>$$<br>\implies xm + ym - xy + m^2 &#x3D; m^2<br>$$</p>
-<p>$$<br>\implies (x - m)(m - y) &#x3D; m^2 \<br>$$</p>
+<p>$$<br>\implies (x - m)(m - y) &#x3D; m^2 \\<br>$$</p>
 </li>
 <li><p><em><strong>Tips: $(x - m)$ , $(m - y)$ 可以为负数</strong></em></p>
 </li>
 </ul>
 </li>
 <li><p>通过分解质因数求 $gcd$ 和 $lcm$</p>
-<p>设 $n &#x3D; \prod_{i&#x3D;1}^k p_i^{e_i} , m &#x3D; \prod_{i&#x3D;1}^k p_i^{f_i}$ , 则:</p>
-<p>$$<br>\gcd (n,m) &#x3D; \prod_{i&#x3D;1}^k p_i^{\min (e_i,f_i)}<br>$$</p>
-<p>$$<br>\operatorname{lcm} (n,m) &#x3D; \prod_{i&#x3D;1}^k p_i^{\max (e_i,f_i)}<br>$$</p>
+<p>设 $n &#x3D; \prod_ {i&#x3D;1}^k p_i^{e_i} , m &#x3D; \prod_ {i&#x3D;1}^k p_i^{f_i}$ , 则:</p>
+<p>$$<br>\gcd (n,m) &#x3D; \prod_ {i&#x3D;1}^k p_i^{\min (e_i,f_i)}<br>$$</p>
+<p>$$<br>\operatorname{lcm} (n,m) &#x3D; \prod_ {i&#x3D;1}^k p_i^{\max (e_i,f_i)}<br>$$</p>
 </li>
 </ul>
 <h2 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h2><ul>
 <li><p>解 $ax + by &#x3D; c$ $($有整数解当且仅当 $\gcd (a, b) \mid c$$)$</p>
 <ol>
-<li>当 $b &#x3D; 0$ , $\begin{cases} x &#x3D; \dfrac{c}{a} \ y &#x3D; 0 \end{cases}$<br>为方程的一组整数解</li>
+<li>当 $b &#x3D; 0$ , $\begin{cases} x &#x3D; \dfrac{c}{a} \\ y &#x3D; 0 \end{cases}$<br>为方程的一组整数解</li>
 <li>当 $b &gt; 0$ , 令:</li>
 </ol>
-<p>$$<br>\begin{cases} a’ &#x3D; b \ b’ &#x3D; a \bmod b &#x3D; a - a &#x2F; b * b \end{cases}<br>$$</p>
-<p>求得 $a’x + b’y &#x3D; c$ 的一组整数解<br>$\begin{cases} x &#x3D; x’ \ y &#x3D; y’ \end{cases}$<br>, 则</p>
+<p>$$<br>\begin{cases} a’ &#x3D; b \\ b’ &#x3D; a \bmod b &#x3D; a - a &#x2F; b * b \end{cases}<br>$$</p>
+<p>求得 $a’x + b’y &#x3D; c$ 的一组整数解<br>$\begin{cases} x &#x3D; x’ \\ y &#x3D; y’ \end{cases}$<br>, 则</p>
 <p>$$<br>x’ + b’y’ &#x3D; c<br>$$</p>
 <p>$$<br>\implies bx’ + (a - a &#x2F; b * b)y’ &#x3D; c<br>$$</p>
 <p>$$<br>\implies bx’ + ay’ - (a &#x2F; b * b)y’ &#x3D; c<br>$$</p>
 <p>$$<br>\implies ay’ - b(x’ - (a &#x2F; b)y’) &#x3D; c<br>$$</p>
-<p>$$<br>\implies \begin{cases} x &#x3D; y’ \ y &#x3D; x’ - (a &#x2F; b)y’ \end{cases}<br>$$</p>
+<p>$$<br>\implies \begin{cases} x &#x3D; y’ \\ y &#x3D; x’ - (a &#x2F; b)y’ \end{cases}<br>$$</p>
 <p>此为 $ax + by &#x3D; c$ 的一组整数解</p>
 <ul>
 <li>代码:<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">exgcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c, <span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!b)&#123;</span><br><span class="line">    x = c / a; y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(c % a) x = y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> a; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> gcd = <span class="built_in">exgcd</span>(b, a % b, c, x, y);</span><br><span class="line">  x = x - (a / b - <span class="number">1</span>) * y;</span><br><span class="line">  y = x - y; x = x - y;</span><br><span class="line">  <span class="keyword">return</span> gcd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -343,9 +382,9 @@
 </li>
 <li><p>由特解推广至通解</p>
 <p>假设其中一组整数解为</p>
-<p>$$<br>\begin{cases} x &#x3D; x_0 \ y &#x3D; y_0 \end{cases}<br>$$</p>
+<p>$$<br>\begin{cases} x &#x3D; x_0 \\ y &#x3D; y_0 \end{cases}<br>$$</p>
 <p>则</p>
-<p>$$<br>\begin{cases} x &#x3D; x_0 + \dfrac{b}{\gcd (a,b)}t \ y &#x3D; y_0 - \dfrac{a}{\gcd (a,b)}t \end{cases} , t \in \mathbb{Z}<br>$$</p>
+<p>$$<br>\begin{cases} x &#x3D; x_0 + \dfrac{b}{\gcd (a,b)}t \\ y &#x3D; y_0 - \dfrac{a}{\gcd (a,b)}t \end{cases} , t \in \mathbb{Z}<br>$$</p>
 <p>为该方程的所有整数解</p>
 </li>
 <li><p>解 $ax \equiv c \pmod m$</p>
@@ -394,7 +433,7 @@
 </ul>
 <h2 id="勒让德公式"><a href="#勒让德公式" class="headerlink" title="勒让德公式"></a>勒让德公式</h2><ul>
 <li><p>记 $e_p \left(n \right)$ 为 $n!$ 中 $p$ 的指数:</p>
-<p>$$<br>e_p \left(n \right) &#x3D; \sum_{1 \le k} \lfloor \dfrac{n}{p^k} \rfloor &#x3D; \lfloor \dfrac{n}{p} \rfloor + \lfloor \dfrac{n}{p^2} \rfloor + \cdots<br>$$</p>
+<p>$$<br>e_p \left(n \right) &#x3D; \sum_ {1 \le k} \lfloor \dfrac{n}{p^k} \rfloor &#x3D; \lfloor \dfrac{n}{p} \rfloor + \lfloor \dfrac{n}{p^2} \rfloor + \cdots<br>$$</p>
 </li>
 <li><p>给定 $n, m, p, k$ , 其中 $p$ 为质数, 检查 $\dbinom{n}{m}$ 是否被 $p^k$ 整除</p>
 <blockquote>
@@ -524,7 +563,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -537,7 +576,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

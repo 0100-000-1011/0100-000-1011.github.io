@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<script type="text/javascript" src="\js\jquery.js"></script>
+
+<script type="text/javascript" src="\js\something\funcs.js"></script>
+
+
+<script type="text/javascript" src="\js\darkmode\darkmode-enhanced.js"></script>
+<script>
+  var darkmode;
+
+  function addDarkmodeWidget() {
+    const options = {
+      bottom: '32px', // default: '32px'
+      right: '32px', // default: '32px'
+      left: 'unset', // default: 'unset'
+      time: '0.5s', // default: '0.3s'
+      mixColor: '#fff', // default: '#fff'
+      backgroundColor: '#fff',  // default: '#fff'
+      buttonColorDark: '#100f2c',  // default: '#100f2c'
+      buttonColorLight: '#fff', // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: '🌓', // default: ''
+      autoMatchOsTheme: true // default: true
+    }
+
+    darkmode = new Darkmode (options);
+    darkmode.switch = () => document.querySelector (".darkmode-toggle").click ();
+    darkmode.showWidget ();
+
+//    var event = new Event ('darkmode:ok');
+//    window.dispatchEvent (event);
+//    console.log ("darkmode:ok");
+  }
+
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/animal.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/animal.jpg">
+  <link rel="mask-icon" href="/images/favicon/animal.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基础基本表示 e.g. $ \left[ 1, 100 \right] $ 中偶数之和 有如下几种表示法：  选取 $ \left[ 0, 100 \right] $ 中满足 $ 2 \mid k $ 的 $ k $ 相加：  $$ \sum ^{ 100 } _ {\substack{ k &#x3D; 0 \\ 2 \mid k } } k $$  选取 $ \left[ 0, 50 \rig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数列学习笔记">
+<meta property="og:url" content="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/summation-note/index.html">
+<meta property="og:site_name" content="Hello World!">
+<meta property="og:description" content="基础基本表示 e.g. $ \left[ 1, 100 \right] $ 中偶数之和 有如下几种表示法：  选取 $ \left[ 0, 100 \right] $ 中满足 $ 2 \mid k $ 的 $ k $ 相加：  $$ \sum ^{ 100 } _ {\substack{ k &#x3D; 0 \\ 2 \mid k } } k $$  选取 $ \left[ 0, 50 \rig">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-09T05:17:25.977Z">
+<meta property="article:author" content="EasonLiang">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="数列">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/summation-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数列学习笔记 | Hello World!</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hello World!</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+
+<link rel="stylesheet" href="/js/aplayer/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script src="/js/aplayer/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/js/aplayer/dist/music.js"></script>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/summation-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar/boy.png">
+      <meta itemprop="name" content="EasonLiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数列学习笔记
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-03 00:00:00" itemprop="dateCreated datePublished" datetime="2023-01-03T00:00:00+08:00">2023-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-01-09 13:17:25" itemprop="dateModified" datetime="2023-01-09T13:17:25+08:00">2023-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="基本表示"><a href="#基本表示" class="headerlink" title="基本表示"></a>基本表示</h3><ul>
+<li><p><em>e.g.</em> $ \left[ 1, 100 \right] $ 中偶数之和</p>
+<p>有如下几种表示法：</p>
+<ol>
+<li><p>选取 $ \left[ 0, 100 \right] $ 中满足 $ 2 \mid k $ 的 $ k $ 相加：<br>  $$ \sum ^{ 100 } _ {\substack{ k &#x3D; 0 \\ 2 \mid k } } k $$</p>
+</li>
+<li><p>选取 $ \left[ 0, 50 \right] $ 中所有 $ k $ 乘 $ 2 $ 后相加：<br>  $$ \sum ^{ 50 } _ { k &#x3D; 0 } 2k $$</p>
+</li>
+<li><p>选取 $ \left[ 0, 100 \right] $ 中所有 $ k $，若 $ 2 \mid k $，将 $ k $ 相加：<br>  $$ \sum ^{ 100 } _ { k &#x3D; 0} k \left[ 2 \mid k \right] $$</p>
+</li>
+</ol>
+<p><em>Tips:</em> $$ [k \ 满足性质 \ E] &#x3D; \begin{cases} 1 &amp; k \ 满足性质 \ E \\ 0 &amp; k \ 不满足性质 \ E \end{cases} $$</p>
+</li>
+</ul>
+<h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><h4 id="化简求和公式"><a href="#化简求和公式" class="headerlink" title="化简求和公式"></a>化简求和公式</h4><h5 id="公式法"><a href="#公式法" class="headerlink" title="公式法"></a>公式法</h5><p>常见的变换：</p>
+<p>$$ \sum ^{ n } _ { k &#x3D; m } a_k &#x3D; \sum ^{ n + i } _ { k &#x3D; m + i } a _ { k - i } &#x3D; \sum ^{ n - i } _ { k &#x3D; m - i } a _ { k + i }$$<br>$$ \sum ^{ n } _ { k &#x3D; m } a_k &#x3D; \sum ^{ n - m } _ { k &#x3D; 0 } a _ { n - k } &#x3D; \sum ^{ n - m } _ { k &#x3D; 0 } a _ { m + k } $$</p>
+<hr>
+<ul>
+<li><p>$$ S &#x3D; 0 \cdot a + 1 \cdot a + \cdots + n \cdot a &#x3D; \sum ^{ n } _ { k &#x3D; 0 } ka $$</p>
+<p><strong>可对 $ S $ 进行以下变换：</strong></p>
+<p>$ k \longrightarrow n - k $：<br>  $$ S &#x3D; \sum ^{ n } _ { k &#x3D; 0 } ka &#x3D; \sum ^{ n } _ { k &#x3D; 0 } (n - k) a $$<br>可得：<br>  $$ 2S &#x3D; \sum ^{ n } _ { k &#x3D; 0 } ka + \sum ^{ n } _ { k &#x3D; 0 } (n - k) a &#x3D; \sum ^{ n } _ { k &#x3D; 0 } na &#x3D; n \sum ^{ n } _ { k &#x3D; 0} a &#x3D; n ( n + 1 ) a $$<br>  $$ S &#x3D; \dfrac{ n (n + 1) }{ 2 } a $$</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>$$ S &#x3D; \sum _ { 1 \le i, j \le n } a_i a_j &#x3D; \left( \sum ^{ n } _ { i &#x3D; 1 } a_i \right) \left( \sum ^{ n } _ { j &#x3D; 1 } a_j \right) &#x3D; \left( \sum ^{ n } _ { k &#x3D; 1 } a_k \right) ^2 $$</p>
+<p><strong>可对 $ S $ 进行以下变换：</strong></p>
+<p>令 $ \overline S &#x3D; \sum _ { 0 \le i \le j \le n } a_i a_j $，则：<br>$$ \because S &#x3D; 2 \overline S - \sum ^{ n } _ { k &#x3D; 1 } a_k^2 $$<br>$$ \therefore 2 \overline S &#x3D; S + \sum ^{ n } _ { k &#x3D; 1 } a_k^2 $$<br>$$ \sum _ { 0 \le i \le j \le n } a_i a_j &#x3D; \dfrac{ 1 }{ 2 } \left( \left( \sum ^{ n } _ { k &#x3D; 1 } a_k \right) ^2 + \sum ^{ n } _ { k &#x3D; 1 } a_k^2 \right) $$</p>
+<p><em>Tips:</em><br>$$ S : \begin{matrix}<br>a_1^2   &amp; a_1 a_2 &amp; a_1 a_3 &amp; \cdots &amp; a_1 a_n \\<br>a_2 a_1 &amp; a_2^2   &amp; a_2 a_3 &amp; \cdots &amp; a_2 a_n \\<br>a_3 a_1 &amp; a_3 a_2 &amp; a_3^2   &amp; \cdots &amp; a_3 a_n \\<br>\vdots  &amp; \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\<br>a_n a_1 &amp; a_n a_2 &amp; a_n a_3 &amp; \cdots &amp; a_n^2<br>\end{matrix} $$<br>$$ \overline S : \begin{matrix}<br>a_1^2   &amp; a_1 a_2 &amp; a_1 a_3 &amp; \cdots &amp; a_1 a_n \\<br>0       &amp; a_2^2   &amp; a_2 a_3 &amp; \cdots &amp; a_2 a_n \\<br>0       &amp; 0       &amp; a_3^2   &amp; \cdots &amp; a_3 a_n \\<br>\vdots  &amp; \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\<br>0       &amp; 0       &amp; 0       &amp; \cdots &amp; a_n^2<br>\end{matrix} $$<br>$$ 2 \overline S : \begin{matrix}<br>2 a_1^2 &amp; a_1 a_2 &amp; a_1 a_3 &amp; \cdots &amp; a_1 a_n \\<br>a_2 a_1 &amp; 2 a_2^2 &amp; a_2 a_3 &amp; \cdots &amp; a_2 a_n \\<br>a_3 a_1 &amp; a_3 a_2 &amp; 2 a_3^2 &amp; \cdots &amp; a_3 a_n \\<br>\vdots  &amp; \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\<br>a_n a_1 &amp; a_n a_2 &amp; a_n a_3 &amp; \cdots &amp; 2 a_n^2<br>\end{matrix} $$<br>$$ \sum ^{ n } _ { k &#x3D; 1 } a_k^2 : \begin{matrix}<br>a_1^2   &amp; 0       &amp; 0       &amp; \cdots &amp; 0       \\<br>0       &amp; a_2^2   &amp; 0       &amp; \cdots &amp; 0       \\<br>0       &amp; 0       &amp; a_3^2   &amp; \cdots &amp; 0       \\<br>\vdots  &amp; \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\<br>0       &amp; 0       &amp; 0       &amp; \cdots &amp; a_n^2<br>\end{matrix} $$<br>由图亦不难得出 $ 2 \overline S &#x3D; S + \sum ^{ n } _ { k &#x3D; 1 } a_k^2 $</p>
+</li>
+</ul>
+<hr>
+<h5 id="数学归纳法"><a href="#数学归纳法" class="headerlink" title="数学归纳法"></a>数学归纳法</h5><p>数学归纳法是一种特殊的直接证明的方法，在证明一些与正整数 $ n $（$ n $ 取无限多个值）有关的数学命题时，它往往是非常有用的研究工具。</p>
+<!-- 一般地，数学归纳法可按如下两个步骤进行：
+  1.归纳奠基：证明当 $ n = n_0 $（$ n_0 \in \mathbb{N}^* $）时命题成立；
+  2.归纳递推：假设当 $ n = k $（$ k \in \mathbb{N}, k \ge n_0 $）时命题成立，证明当 $ n = k + 1 $ 时命题也成立。
+根据以上两步就可以断定命题对于从 $ n_0 $ 开始的所有正整数 $ n $ 都成立。 -->
+
+<hr>
+<ul>
+<li><p>$$ S_n &#x3D; \sum ^{ n } _ { k &#x3D; 1 } ( 2k - 1 ) $$</p>
+<p>找规律有：</p>
+<table>
+<thead>
+<tr>
+<th align="center">$ n $</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">$\cdots$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$ S_n $</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">9</td>
+<td align="center">16</td>
+<td align="center">25</td>
+<td align="center">36</td>
+<td align="center">$\cdots$</td>
+</tr>
+</tbody></table>
+<p>猜测 $ S_n &#x3D; n^2 $，证明过程如下：</p>
+<ul>
+<li>当 $ n &#x3D; 1 $，$ S_n &#x3D; n^2 $ 成立；</li>
+<li>当 $ S_ { n - 1 } &#x3D; ( n - 1 ) $ 成立，有：<br>$$ \begin{aligned}<br>S_n &amp; &#x3D; S_ { n - 1 } + ( 2n - 1 ) \\<br>    &amp; &#x3D; ( n - 1 ) ^2 + 2n - 1    \\<br>    &amp; &#x3D; n^2 - 2n + 1 + 2n - 1    \\<br>    &amp; &#x3D; n^2<br>\end{aligned} $$</li>
+</ul>
+<p>证毕。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>证明均值不等式的特殊情形：当 $ n $ 为正整数，$ a_k \le 0 $，有<br>$$ \sqrt[ n ]{ \prod ^{ n } _ { k &#x3D; 1 } a_k } \le \dfrac{ \sum ^{ n } _ {k &#x3D; 1} a_k }{ n } $$</p>
+<!-- ^{^{\normalsize{ n }}} -->
+
+<p>称 $ P_n : \prod ^{ n } _ { k &#x3D; 1 } a_k \le \left( \sum ^{ n } _ {k &#x3D; 1} \dfrac{ a_k }{ n } \right) ^n $，原题等价于证明 $ P_n $。<br>证明由以下三个步骤组成：</p>
+<ol>
+<li>证明 $ P_1, P_2 $；</li>
+<li>当 $ P_2, P_k $ 成立，证明 $ P_ { 2k } $；</li>
+<li>当 $ P_2, P_ { n + 1 } $ 成立，证明 $ P_n $。</li>
+</ol>
+<p>不难看出，完成以上步骤后，命题得证。</p>
+<p>证明过程如下： </p>
+<ol>
+<li><ul>
+<li>对于 $ P_1 $， $ a_1 \le a_1 $ 恒成立;</li>
+<li>对于 $ P_2 $，对原式进行如下变换：<br>$$ \begin{aligned}<br>   &amp;&amp; a_1 a_2   &amp; \le \left( \dfrac{ a_1 + a_2 }{ 2 } \right) ^2 \\<br>  \iff &amp;&amp; 4 a_1 a_2 &amp; \le ( a_1 + a_2 ) ^2                           \\<br>  \iff &amp;&amp; 0         &amp; \le ( a_1 - a_2 ) ^2<br>\end{aligned} $$<br>故恒成立。</li>
+</ul>
+<p>综上 $ P_1, P_2 $ 均为真命题。</p>
+</li>
+<li><p>当 $ P_2, P_k $ 成立，有：</p>
+</li>
+</ol>
+<p>  $$ \begin{aligned}<br>      \prod ^{ 2k } _ { i &#x3D; 1 } a_i<br>    &amp; &#x3D;   &amp;&amp; \left( \prod ^{ k } _ { i &#x3D; 1 } a_i \right) \left( \prod ^{ 2k } _ { i &#x3D; k + 1 } a_i \right) \\<br>    &amp; \le &amp;&amp; \left( \sum ^{ k } _ { i &#x3D; 1 } \dfrac{ a_i }{ k } \right) \left( \sum ^{ 2k } _ { i &#x3D; k + 1 } \dfrac{ a_i }{ k } \right) \\<br>    &amp; \le &amp;&amp; \left( \frac{ 1 }{ 2 } \right) ^{ 2k } \left( \sum ^{ 2k } _ { i &#x3D; 1 } \dfrac{ a_i }{ k } \right) ^{ 2k } \\<br>    &amp; &#x3D;   &amp;&amp; \left( \sum ^{ 2k } _ { i &#x3D; 1 } \frac{ a_i }{ 2k } \right) ^{ 2k }<br>  \end{aligned} $$</p>
+<p>  得 $ P_ { 2k } $ 成立。</p>
+<ol start="3">
+<li>当 $ P_2, P_ { n + 1 } $ 成立，令 $ a_ { n + 1 } &#x3D; \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ a_k }{ n } $，有：</li>
+</ol>
+<p>  $$ \begin{aligned}<br>      \left( \prod ^{ n } _ { k &#x3D; 1 } a_k \right) a_ { n + 1 }<br>    &amp; &#x3D;   &amp;&amp; \left( \prod ^{ n + 1 } _ { k &#x3D; 1 } a_k \right) \\<br>    &amp; \le &amp;&amp; \left( \sum ^{ n + 1 } _ { k &#x3D; 1 } \dfrac{ a_k }{ n + 1 } \right) ^{ n + 1 } \\<br>    &amp; &#x3D;   &amp;&amp; \left( \dfrac{ \left( \sum ^{ n } _ { k &#x3D; 1 } a_k \right) + \left( \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ a_k }{ n } \right) }{ n + 1 } \right) ^{ n + 1 } \\<br>    &amp; \le &amp;&amp; \left( \dfrac{ ( n + 1 ) \sum ^{ n } _ { k &#x3D; 1 } a_k }{ n ( n + 1 ) } \right) ^{ n + 1 } \\<br>    &amp; &#x3D;   &amp;&amp; \left( \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ a_k }{ n } \right) ^{ n + 1 }<br>  \end{aligned} $$</p>
+<p>  $$ \therefore \left( \prod ^{ n } _ { k &#x3D; 1 } a_k \right) \le \dfrac{ \left( \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ a_k }{ n } \right) ^{ n + 1 } }{ a_ { n + 1 } } &#x3D; \left( \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ a_k }{ n } \right) ^n $$</p>
+<p>  得 $ P_n $ 成立。</p>
+<p>综上，对于任意正整数 $ n $，$ P_n $ 均成立。证毕。</p>
+</li>
+</ul>
+<hr>
+<h5 id="拆项法"><a href="#拆项法" class="headerlink" title="拆项法"></a>拆项法</h5><p>令 $ S_n &#x3D; \sum ^{ n } _ { k &#x3D; 0 } a_k $，则可以将数列首项或末项分离，得到：</p>
+<p>$$ S_ { n + 1 } &#x3D; a_0 + \sum ^{ n + 1 } _ { k &#x3D; 1 } a_k &#x3D; a_0 + \sum ^{ n } _ { k &#x3D; 0 } a_ { k + 1 }$$</p>
+<p>$$ S_ { n + 1 } &#x3D; \sum ^{ n } _ { k &#x3D; 0 } a_k + a_ { n + 1 } &#x3D; S_n + a_ { n + 1 } $$</p>
+<hr>
+<ul>
+<li><p>$$ S_n &#x3D; 1 + a + a^2 + a^3 + \cdots + a^n &#x3D; \sum ^{ n } _ { k &#x3D; 1 } a^k $$</p>
+<p>令 $ a_k &#x3D; a^k $，有：</p>
+<p>$$ \because \begin{cases}<br>  S_ { n + 1 } &#x3D; a_0 + \sum ^{ n } _ { k &#x3D; 0 } a_ { k + 1 } &#x3D; a S_n + 1 \\<br>  S_ { n + 1 } &#x3D; S_n + a_ { n + 1 } &#x3D; S_n + a^{ n + 1 }<br>\end{cases} $$</p>
+<p>$$ \therefore a S_n + 1 &#x3D; S_n + a^{ n + 1 } $$</p>
+<p>$$ S_n &#x3D; \begin{cases}<br>  \dfrac{ a^{ n + 1 } - 1 }{ a - 1 } &amp; a \ne 1 \\<br>  n + 1                              &amp; a &#x3D; 1<br>\end{cases} $$</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>$$ S_n &#x3D; \sum ^{ n } _ { k &#x3D; 1 } k 2^k $$</p>
+<p>  令 $ a_k &#x3D; k 2^k $，有：</p>
+<p>  $$ \because \begin{cases}<br>S_ { n + 1 } &amp; &#x3D; a_0 + \sum ^{ n } _ { k &#x3D; 0 } a_ { k + 1 } &#x3D; 0 + \sum ^{ n } _ { k &#x3D; 0 } ( k + 1 ) 2 ^{ k + 1 } \\<br>            &amp; &#x3D; 2 \sum ^{ n } _ { k &#x3D; 0 } k 2^k + 2 \sum ^{ n } _ { k &#x3D; 0 } 2^k &#x3D; 2S_n + 2^{ n + 2 } - 2 \\ \\<br>S_ { n + 1 } &amp; &#x3D; S_n + a_ { n + 1 } &#x3D; S_n + 2^{ n + 1 } n + 2^{ n + 1 }<br>  \end{cases} $$</p>
+<p>  $$ \therefore 2S_n + 2^{ n + 2 } - 2 &#x3D; S_n + 2^{ n + 1 } n + 2^{ n + 1 } $$</p>
+<p>  $$ S_n &#x3D; ( n - 1 ) 2^{ n + 1 } + 2 $$</p>
+</li>
+</ul>
+<hr>
+<h4 id="使用求和公式表示函数"><a href="#使用求和公式表示函数" class="headerlink" title="使用求和公式表示函数"></a>使用求和公式表示函数</h4><p>对于数列 $ { T_n } $，若已知下列递推公式：</p>
+<p>$$ \begin{aligned}<br>  T_0     &amp; &#x3D; \alpha \\<br>  a_n T_n &amp; &#x3D; b_n T_ { n - 1 } + c_n<br>\end{aligned} $$</p>
+<p>则我们可以对其进行下列推导：</p>
+<p>  定义数列 $ { s_n } $ 与 $ { S_n }$，令 $ s_ { n - 1 } a_ { n - 1 } &#x3D; s_n b_n , S_n &#x3D; s_n a_n T_n$，有：</p>
+<p>  $$ S_n &#x3D; s_n \left( b_n T_ {n - 1} + c_n \right) &#x3D; s_ { n - 1 } a_ { n - 1 } T_ { n - 1 } + s_n c_n &#x3D; S_ { n - 1 } + s_n c_n $$</p>
+<p>  故不难得到：</p>
+<p>  $$ \begin{aligned}<br>    S_n &amp; &#x3D; S_ { n - 1 } + s_n c_n \\<br>        &amp; &#x3D; S_ { n - 2 } + s_n c_n + s_ { n - 1 } c_ { n - 1 } \\<br>        &amp; &#x3D; \cdots \\<br>        &amp; &#x3D; S_ { 0 } + s_n c_n + s_ { n - 1 } c_ { n - 1 } + \cdots + s_1 c_1 \\<br>        &amp; &#x3D; s_0 a_0 T_0 + \sum ^{ n } _ { k &#x3D; 1 } s_k c_k<br>  \end{aligned} $$</p>
+<p>  $$ T_n &#x3D; \dfrac{ 1 }{ s_n a_n } \left( s_0 a_0 T_0 + \sum ^{ n } _ { k &#x3D; 1 } s_k c_k \right) $$</p>
+<p>  对于 $ { s_n }$，我们可以通过如下方式构造：</p>
+<p>  $$ \begin{aligned}<br>    s_n &amp; &#x3D; \dfrac{ a_ { n - 1 } s_ { n - 1 } }{ b_n } \\<br>        &amp; &#x3D; \dfrac{ a_ { n - 1 } a_ { n - 2 } s_ { n - 2 } }{ b_n b_ { n - 1 } } \\<br>        &amp; &#x3D; \cdots \\<br>        &amp; &#x3D; \dfrac{ s_0 \prod ^{ n - 1 } _ { k &#x3D; 0 } a_k }{ \prod ^{ n } _ { k &#x3D; 0 } b_k }<br>  \end{aligned} $$</p>
+<p>  令 $ s_0 &#x3D; 1 $，则 $ s_n &#x3D; \dfrac{ \prod ^{ n - 1 } _ { k &#x3D; 0 } a_k }{ \prod ^{ n } _ { k &#x3D; 0 } b_k } $。</p>
+<hr>
+<ul>
+<li><p>用求和公式表示 $ 1 \sim n $ 的 <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/derangement/">错排数</a> $ D_n $</p>
+<p>将错排问题具体化，可以得到其递推公式：</p>
+<blockquote>
+<p>把错位排列问题具体化，考虑这样一个问题：</p>
+<p>$n$ 封不同的信，编号分别是 $1,2,3,4,5$，现在要把这五封信放在编号 $1,2,3,4,5$ 的信封中，要求信封的编号与信的编号不一样。问有多少种不同的放置方法？</p>
+<p>假设考虑到第 $n$ 个信封，初始时暂时把第 $n$ 封信放在第 $n$ 个信封中，然后考虑两种情况的递推：</p>
+<ul>
+<li>前面 $n-1$ 个信封全部装错；</li>
+<li>前面 $n-1$ 个信封有一个没有装错其余全部装错。</li>
+</ul>
+<p>对于第一种情况，前面 $n-1$ 个信封全部装错：因为前面 $n-1$ 个已经全部装错了，所以第 $n$ 封只需要与前面任一一个位置交换即可，总共有 $D_ {n-1}\times (n-1)$ 种情况。</p>
+<p>对于第二种情况，前面 $n-1$ 个信封有一个没有装错其余全部装错：考虑这种情况的目的在于，若 $n-1$ 个信封中如果有一个没装错，那么把那个没装错的与 $n$ 交换，即可得到一个全错位排列情况。</p>
+<p>其他情况，不可能通过一次操作来把它变成一个长度为 $n$ 的错排。</p>
+<p>于是可得，错位排列数满足递推关系：</p>
+<p>$$ D_n&#x3D;(n-1)(D_ {n-1}+D_ {n-2}) $$</p>
+<p>—— 摘自 <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/derangement/#%E9%80%92%E6%8E%A8%E7%9A%84%E8%AE%A1%E7%AE%97">错位排列 - OI Wiki</a></p>
+</blockquote>
+<p>不难得到 $ D_1 &#x3D; 0, D_2 &#x3D; 1 $，</p>
+<p>将得到的结果稍作处理：</p>
+<p>$$ \begin{aligned}<br>  D_n - n D_ { n - 1 }<br>&amp; &#x3D; - \left( D_ { n - 1 } - ( n - 1 ) D_ { n - 2 } \right) \\<br>&amp; &#x3D; D_ { n - 2 } - ( n - 2 ) D_ { n - 3 } \\<br>&amp; &#x3D; \cdots \\<br>&amp; &#x3D; ( -1 ) ^{ n - 2 } ( D_2 - D_1 ) &#x3D; ( -1 )^n<br>\end{aligned} $$</p>
+<p>也得出了 OI Wiki 中给出的另一个递推关系：</p>
+<p>$$ D_n&#x3D;nD_ {n-1}+{(-1)}^n $$</p>
+<p>代入 $ D_1 $，我们可以定义 $ D_0 $：</p>
+<p>$$ D_1 &#x3D; D_0 - 1 $$<br>$$ D_0 &#x3D; D_1 + 1 &#x3D; 1 $$</p>
+<p>于是，我们得到：</p>
+<p>$$ \begin{cases}<br>  &amp; D_0 &#x3D; 1 \\<br>  &amp; D_n &#x3D; n D_ { n - 1 } + ( -1 )^n<br>\end{cases} $$</p>
+<p>有 $$ \begin{cases}<br>  &amp; a_n &#x3D; 1 \\<br>  &amp; b_n &#x3D; n \\<br>  &amp; c_n &#x3D; ( -1 )^n \\<br>  &amp; s_n &#x3D; \dfrac{ \prod ^{ n - 1 } _ { k &#x3D; 1 } a_k }{ \prod ^{ n } _ { k &#x3D; 1 } b_k } &#x3D; \dfrac{ 1 }{ n! }<br>\end{cases} $$</p>
+<p>则 $ D_n $ 可以被求和公式表示为：</p>
+<p>$$ \begin{aligned}<br>  D_n<br>&amp; &#x3D; \dfrac{ 1 }{ s_n a_n } \left( s_0 a_0 D_0 + \sum ^{ n } _ { k &#x3D; 1 } s_k c_k \right) \\<br>&amp; &#x3D; n! ( 1 + \sum ^{ n } _ { k &#x3D; 1 } \dfrac{ ( -1 )^k }{ k! } ) \\<br>&amp; &#x3D; n! \sum ^{ n } _ { k &#x3D; 0 } \dfrac{ (-1)^k }{ k! }<br>\end{aligned} $$</p>
+<p>或者</p>
+<p>$$ \dfrac{ D_n }{ n! } &#x3D; \sum ^{ n } _ { k &#x3D; 0 } \dfrac{ (-1)^k }{ k! } $$</p>
+<p><em>Tips:</em> 我们知道 </p>
+<p>$$ \lim _ { n \to +\infty } \sum ^{ n } _ { k &#x3D; 0 } \dfrac{ (-1)^k }{ k! } &#x3D; \dfrac{ 1 }{ \mathrm{ e } } $$</p>
+<p>这意味着，当 $ n $ 足够大时，$ 1 \sim n $ 的随机全排列有 $ \frac{ 1 }{ \mathrm{ e } } $ 的概率是错位排列。</p>
+</li>
+</ul>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+              <a href="/tags/%E6%95%B0%E5%88%97/" rel="tag"># 数列</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E5%85%B6%E5%AE%83/2023-new-year/" rel="prev" title="2023, Happy New Year!">
+      <i class="fa fa-chevron-left"></i> 2023, Happy New Year!
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81Nzc4OC8zNDI1MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A1%A8%E7%A4%BA"><span class="nav-text">基本表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-text">基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%96%E7%AE%80%E6%B1%82%E5%92%8C%E5%85%AC%E5%BC%8F"><span class="nav-text">化简求和公式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%B3%95"><span class="nav-text">公式法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95"><span class="nav-text">数学归纳法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%86%E9%A1%B9%E6%B3%95"><span class="nav-text">拆项法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B1%82%E5%92%8C%E5%85%AC%E5%BC%8F%E8%A1%A8%E7%A4%BA%E5%87%BD%E6%95%B0"><span class="nav-text">使用求和公式表示函数</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="EasonLiang"
+      src="/images/avatar/boy.png">
+  <p class="site-author-name" itemprop="name">EasonLiang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/0100-000-1011" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;0100-000-1011" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://luogu.com.cn/" title="http:&#x2F;&#x2F;luogu.com.cn" rel="noopener" target="_blank">Luogu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://atcoder.jp/" title="http:&#x2F;&#x2F;atcoder.jp&#x2F;" rel="noopener" target="_blank">Atcoder</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://codeforces.com/" title="https:&#x2F;&#x2F;codeforces.com&#x2F;" rel="noopener" target="_blank">Codeforces</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://vjudge.net/" title="https:&#x2F;&#x2F;vjudge.net&#x2F;" rel="noopener" target="_blank">Vjudge</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://poj.org/" title="http:&#x2F;&#x2F;poj.org&#x2F;" rel="noopener" target="_blank">POJ</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+
+
+
+
+<p id="hitokoto" align="center" onclick="find()" ondblclick="count()">
+  <font id="hitokoto_text" size=2>:D 获取中...</font>
+</p>
+
+<script>
+  const hitokoto = document.querySelector('#hitokoto_text')
+  
+  function init () {
+    ++localStorage.clickcount;
+
+    while (--localStorage.clickcount) {
+      localStorage.removeItem (
+        localStorage.clickcount
+      );
+    }
+
+    console.log (localStorage.clickcount);
+    console.log ("clear");
+  }
+
+  function change () {
+    fetch('https://v1.hitokoto.cn')
+      .then(response => response.json())
+      .then(data => {
+        hitokoto.innerText = data.hitokoto
+      })
+      .catch(console.error)
+  }
+
+  function find () {
+    for (let i = 1; i <= localStorage.clickcount; ++i)
+      console.log (localStorage.getItem (i));    
+  }
+
+  function count () {
+    if (localStorage.clickcount)
+      localStorage.clickcount = 1 +
+      Number(localStorage.clickcount);
+    else localStorage.clickcount = 1;
+
+    localStorage.setItem (
+      localStorage.clickcount,
+      hitokoto.innerText
+    );
+
+    console.log (localStorage.clickcount);
+    console.log (hitokoto.innerText);
+
+    change ();
+  }
+
+  change ();
+</script>
+
+
+<div class="copyright">
+  <p align="center">
+    
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">EasonLiang</span>
+  <br>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <p align="center">
+      <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+      <span class="post-meta-divider">|</span>
+      <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <br>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+   
+
+<script>
+  var OriginTitile = document.title;
+  var titleTime, rnd;
+
+  var rand = () => Math.floor (Math.random () * 0x3f3f3f3f);
+
+  document.addEventListener("visibilitychange", function() {
+
+    if (document.hidden) {
+      rnd = rand () % 7;
+      $('[rel="icon"]').attr('href', "/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/fail.ico,/images/favicon/bilibili.ico,/images/favicon/fail.ico".split(",")[rnd]);
+      document.title = "(*/ω＼*) 我藏好了哦~,(つェ⊂) 看不到看不到看不到,ヽ(●-`Д´-)ノ你丑你就走！,╭(°A°`)╮ 页面崩溃啦~ 快回来看看~,!!!∑(ﾟДﾟノ)ノ 怎么肥四？,哔哩哔哩 (゜-゜)つロ 干杯~-bilibili,(╥╯﹏╰╥)ง 别——离——开——我——".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      $('[rel="icon"]').attr('href', "/images/favicon/animal.jpg");
+      document.title = "(*´∇｀*) 被你发现啦~,ヽ(･ω･´ﾒ) 我就知道你会来找我,ヾ(Ő∀Ő3)ノ你帅就回来！,(ฅ>ω<*ฅ) 噫，又好了~,(〃'▽'〃) 啊，没事没事~,٩( 'ω' )و 嘻嘻！,(ノ▽｀*)ノ[你回来啦♪]=з=з=з".split(",")[rnd];
+      if (false) document.title += " | " + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

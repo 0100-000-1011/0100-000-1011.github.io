@@ -48,14 +48,14 @@ var list = [
 
 list.sort (
     function (x, y) {
-    var dx = x.date, dy = y.date;
+        var dx = x.date, dy = y.date;
 
-    if (dx.year != dy.year)
-        return dx.year - dy.year;
-    if (dx.month != dy.month)
-        return dx.month - dy.month;
-    if (dx.day != dy.day)
-        return dx.day - dy.day;
+        if (dx.year != dy.year)
+            return dx.year - dy.year;
+        if (dx.month != dy.month)
+            return dx.month - dy.month;
+        if (dx.day != dy.day)
+            return dx.day - dy.day;
     
         return 0;
     }
@@ -68,20 +68,20 @@ var element = document.getElementById ("content");
 
 for (rec of list) {
     if (rec.date.year != year) {
-    year = rec.date.year;
-    
-    var chcontent = document.createTextNode (year);
-    
-    var cheader = document.createElement ("span");
-    cheader.className = "collection-header";
-    cheader.style = "opacity: 1; display: inline-block; transform: translateX(0px);";
-    cheader.appendChild (chcontent);
-    
-    var cyear = document.createElement ("div");
-    cyear.className = "collection-year";
-    cyear.appendChild (cheader);
-    
-    element.appendChild (cyear);
+        year = rec.date.year;
+        
+        var chcontent = document.createTextNode (year);
+        
+        var cheader = document.createElement ("span");
+        cheader.className = "collection-header";
+        cheader.style = "opacity: 1; display: inline-block; transform: translateX(0px);";
+        cheader.appendChild (chcontent);
+        
+        var cyear = document.createElement ("div");
+        cyear.className = "collection-year";
+        cyear.appendChild (cheader);
+        
+        element.appendChild (cyear);
     }
     
     var adcontent = document.createTextNode (rec.date.month + "-" + rec.date.day);
