@@ -1,1 +1,0 @@
-var DEBUG = () => typeof (debug) != "undefined" && debug == "on";
