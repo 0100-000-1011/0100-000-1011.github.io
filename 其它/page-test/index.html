@@ -120,7 +120,46 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}
+    .spoiler .spoiler-box.spoiler-1ffd9, .spoiler .spoiler-box.spoiler-1ffd9 > * {
+      color: black;
+      background-color: black;
+    }
+
+    .spoiler .spoiler-box.spoiler-bda96, .spoiler .spoiler-box.spoiler-bda96 > * {
+      color: red;
+      background-color: red;
+    }</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -469,9 +508,64 @@
 <h2 id="积分"><a href="#积分" class="headerlink" title="积分"></a>积分</h2><h3 id="定积分"><a href="#定积分" class="headerlink" title="定积分"></a>定积分</h3><p>$$ \mathop {\int} \nolimits _a^b f { \left( {x} \right) } \text{d} x &#x3D; -\mathop {\int} \nolimits _b^a f { \left( {x} \right) } \text{d} x $$</p>
 <h3 id="不定积分"><a href="#不定积分" class="headerlink" title="不定积分"></a>不定积分</h3><p>$$<br>\begin{align*}<br>&amp; \int k \text{d} x &#x3D; kx + C \\<br>&amp; \int \mathop{x} ^{\mu} \text{d} x &#x3D; \frac{ \mathop{x} ^{\mu + 1} }{\mu + 1} + C, \ \mu \neq -1 \\<br>&amp; \int \frac{1}{x} \text{d} x &#x3D; \ln { \left| {x} \right| } + C \\<br>&amp; \int \frac{1}{1 + \mathop{x}^2} \text{d} x &#x3D; \arctan x + C\\<br>&amp; \int \frac{1}{\sqrt{1 - \mathop{x}^2}} \text{d} x &#x3D; \arcsin x + C<br>\end{align*}<br>$$</p>
 <h3 id="曲线积分"><a href="#曲线积分" class="headerlink" title="曲线积分"></a>曲线积分</h3><p>$$<br>\begin{align*}<br>&amp; {L&#x3D;\mathop{L}\nolimits_ { {1} }+\mathop{L}\nolimits_2 \Rightarrow \mathop{ \int }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s&#x3D;\mathop{ \int }\nolimits_ { {\mathop{L}\nolimits_ { {1} } } }f{ \left( {x,y} \right) } \text{d} s+\mathop{ \int }\nolimits_ { {\mathop{L}\nolimits_2} }f{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; {\mathop{ \iint }\nolimits_ {L}{ \left[ { \alpha f{ \left( {x,y} \right) }+ \beta f{ \left( {x,y} \right) } } \right] } \text{d} s&#x3D; \alpha \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s+ \beta \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; {f{ \left( {x,y} \right) } \le g{ \left( {x,y} \right) } \Rightarrow \mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s \le \mathop{ \iint }\nolimits_ {L}g{ \left( {x,y} \right) } \text{d} s} \\<br>&amp; { \left| {\mathop{ \iint }\nolimits_ {L}f{ \left( {x,y} \right) } \text{d} s} \left|  \le \mathop{ \iint }\nolimits_ {L}{ \left| {f{ \left( {x,y} \right) } } \right| } \text{d} s\right. \right. }<br>\end{align*}<br>$$</p>
-<!--
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><h2 id="Ruby-文字上方注释"><a href="#Ruby-文字上方注释" class="headerlink" title="Ruby 文字上方注释"></a>Ruby 文字上方注释</h2><ruby>
+<rb>美国总统</rb>
+<rp>(</rp>
+<rt>中国间谍</rt>
+<rp>)<rp>
+</ruby> <ruby>
+<rb>特朗普</rb>
+<rp>(</rp>
+<rt>川建国</rt>
+<rp>)<rp>
+</ruby>
+<br>
+<ruby><rb>打倒</rb><rp>(</rp><rt>wǒ ài</rt><rp>)</rp></ruby> <ruby>
+<rb>特朗普</rb>
+<rp>(</rp>
+<rt>chuān jiàn guó</rt>
+<rp>)<rp>
+</ruby>
+<br>
+<ruby>
+<rb>超電磁砲</rb>
+<rp>(</rp>
+<rt>レールガン</rt>
+<rp>)<rp>
+</ruby>
+<br>
+<ruby><rb>初音未来</rb><rp>(</rp><rt>chū yīn wèi lái</rt><rp>)</rp></ruby>
+<br>
 
-# 其它
+<h2 id="Spoiler-文字遮盖"><a href="#Spoiler-文字遮盖" class="headerlink" title="Spoiler 文字遮盖"></a>Spoiler 文字遮盖</h2>
+  <span class="spoiler" onclick="this.classList.toggle('spoiler')">
+    <span class="spoiler-blur spoiler-1ffd9">默认</span>
+  </span>
+<br>
+
+  <span class="spoiler" onclick="this.classList.toggle('spoiler')">
+    <span class="spoiler-blur spoiler-1ffd9">模糊</span>
+  </span>
+<br>
+
+  <span class="spoiler" onclick="this.classList.toggle('spoiler')">
+    <span class="spoiler-box spoiler-1ffd9">黑色</span>
+  </span>
+<br>
+
+  <span class="spoiler" onclick="this.classList.toggle('spoiler')">
+    <span class="spoiler-box spoiler-bda96">红色</span>
+  </span>
+<br>
+<ruby>
+<rb>SPOILER</rb>
+<rp>(</rp>
+<rt>
+  <span class="spoiler" onclick="this.classList.toggle('spoiler')">
+    <span class="spoiler-blur spoiler-1ffd9">+RUBY</rt> <rp>)<rp></span>
+  </span></ruby>
+
+<!--
 
 ## HTML 代码块
 
@@ -498,8 +592,8 @@
       <i class="fa fa-chevron-left"></i> OIer人生
     </a></div>
       <div class="post-nav-item">
-    <a href="/%E6%9D%82%E6%96%87/%E8%AF%97/Fishing/" rel="next" title="钓鱼">
-      钓鱼 <i class="fa fa-chevron-right"></i>
+    <a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%A5%E8%AF%86/number-theory-note/" rel="next" title="数论学习笔记">
+      数论学习笔记 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -567,7 +661,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown"><span class="nav-text">Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="nav-text">扩展语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LaTeX"><span class="nav-text">$\LaTeX$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="nav-text">基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E8%BF%90%E7%AE%97"><span class="nav-text">初等运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%92%8C%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-text">求和求积公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-text">矩阵行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E5%88%86"><span class="nav-text">积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E7%A7%AF%E5%88%86"><span class="nav-text">曲线积分</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown"><span class="nav-text">Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%AD%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="nav-text">扩展语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LaTeX"><span class="nav-text">$\LaTeX$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="nav-text">基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E8%BF%90%E7%AE%97"><span class="nav-text">初等运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%92%8C%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-text">求和求积公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-text">矩阵行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E5%88%86"><span class="nav-text">积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AE%9A%E7%A7%AF%E5%88%86"><span class="nav-text">不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E7%A7%AF%E5%88%86"><span class="nav-text">曲线积分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-%E6%96%87%E5%AD%97%E4%B8%8A%E6%96%B9%E6%B3%A8%E9%87%8A"><span class="nav-text">Ruby 文字上方注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spoiler-%E6%96%87%E5%AD%97%E9%81%AE%E7%9B%96"><span class="nav-text">Spoiler 文字遮盖</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -583,7 +677,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -596,7 +690,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

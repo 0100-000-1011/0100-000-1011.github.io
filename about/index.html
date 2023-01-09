@@ -57,12 +57,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="::marker {   color: blue;   font-size: 0em; }      我们都是行走在镜面边缘的人。低下头看到的，是半个迷茫的自己，和半个不见底的深渊。 ——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。          理想在哪里？未来在哪里？  当初我们或犹豫或坚决地走上了学科竞赛这条路，在现实的大门面前。 我们有着这样那样的理由，或者是">
+  <meta name="description" content="::marker {   color: blue;   font-size: 0em; }       我们都是行走在镜面边缘的人。 低下头看到的，是半个迷茫的自己，和半个不见底的深渊。——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。           理想在哪里？未来在哪里？  当初我们或犹豫或坚决地走上了学科竞赛这条路，在现实的大门面前。 我们有着这样那样的理由，或">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="http://example.com/about/index.html">
 <meta property="og:site_name" content="Hello World!">
-<meta property="og:description" content="::marker {   color: blue;   font-size: 0em; }      我们都是行走在镜面边缘的人。低下头看到的，是半个迷茫的自己，和半个不见底的深渊。 ——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。          理想在哪里？未来在哪里？  当初我们或犹豫或坚决地走上了学科竞赛这条路，在现实的大门面前。 我们有着这样那样的理由，或者是">
+<meta property="og:description" content="::marker {   color: blue;   font-size: 0em; }       我们都是行走在镜面边缘的人。 低下头看到的，是半个迷茫的自己，和半个不见底的深渊。——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。           理想在哪里？未来在哪里？  当初我们或犹豫或坚决地走上了学科竞赛这条路，在现实的大门面前。 我们有着这样那样的理由，或">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-08T16:00:00.000Z">
 <meta property="article:modified_time" content="2022-12-11T05:53:57.172Z">
@@ -118,7 +118,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><style type="text/css">
+.spoiler {
+  display: inline-flex;
+}
+p.spoiler {
+  display: flex;
+}
+.spoiler a {
+  pointer-events: none;
+}
+.spoiler-blur, .spoiler-blur > * {
+  transition: text-shadow .5s ease;
+}
+.spoiler .spoiler-blur, .spoiler .spoiler-blur > * {
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+.spoiler .spoiler-blur:hover, .spoiler .spoiler-blur:hover > * {
+  text-shadow: 0 0 5px grey;
+}
+.spoiler-box, .spoiler-box > * {
+  transition: color .5s ease,
+  background-color .5s ease;
+}
+.spoiler .spoiler-box, .spoiler .spoiler-box > * {
+  color: black;
+  background-color: black;
+  text-shadow: none;
+}</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -270,8 +300,10 @@
 <details>
 <summary>
 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31831399/answer/100876490">
-<blockquote><p>我们都是行走在镜面边缘的人。<br>低下头看到的，是半个迷茫的自己，和半个不见底的深渊。</p>
-<footer><strong>——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。</strong></footer></blockquote>
+<blockquote><br>
+我们都是行走在镜面边缘的人。
+低下头看到的，是半个迷茫的自己，和半个不见底的深渊。<footer><strong>——以此献给所有OIer，以及所有竞赛生，以及所有为梦想而不顾一切的人。</strong></footer></blockquote>
+<br>
 </a>
 
 <a>
@@ -337,8 +369,9 @@
 <p>我想不管哪一门竞赛都是一样。</p>
 <p>5月生物联赛。6月信息省选。8月信息全国赛。9月物理化学联赛。10月数学联赛。</p>
 <p>选择竞赛，选择OI，既是痛苦，亦是福祉。</p>
-<blockquote class="pullquote"><p>转载自 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31831399/answer/100876490">成为一个OIer／当过一个OIer是一种怎样的体验？ - 知乎</a>，有删改</p>
-</blockquote>
+<blockquote class="pullquote"><br>
+转载自 [成为一个OIer／当过一个OIer是一种怎样的体验？ - 知乎](https://www.zhihu.com/question/31831399/answer/100876490)，有删改</blockquote>
+<br>
 
 <hr>
 </p>
