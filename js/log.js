@@ -45,7 +45,7 @@ var list = [
         },
     },
     {
-        name: "设置夜晚模式",
+        name: "设置夜间模式",
         content: "很鸡肋，似乎并没有什么卵用",
         date: {
             year: 2023,
